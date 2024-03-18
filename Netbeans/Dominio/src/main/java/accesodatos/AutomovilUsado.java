@@ -1,5 +1,6 @@
 package accesodatos;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 /**
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
  */
 
 @Entity
+@DiscriminatorValue("Usado")
 public class AutomovilUsado extends Automovil{
     
+    //Atributos
 }

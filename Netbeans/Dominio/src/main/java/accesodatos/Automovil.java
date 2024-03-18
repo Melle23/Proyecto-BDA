@@ -1,6 +1,7 @@
 package accesodatos;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -15,18 +16,27 @@ import javax.persistence.InheritanceType;
  * @author molin
  */
 @Entity //Especifica la creacion de la entidad
-@Inheritance(strategy = InheritanceType.JOINED) 
-@DiscriminatorColumn(name = "tipo_automovil", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED) //Especica el tipo de herencia
+@DiscriminatorColumn(name = "tipo_automovil", discriminatorType = DiscriminatorType.STRING) //Especifica la tabla discriminatoria y el tipo de valor 
 public class Automovil implements Serializable {
     
     @Id //Llave primaria de la entidad
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(name = "numeroDeSerie", nullable = false)
     private String numeroDeSerie;
+    
+    @Column(name = "marca", nullable = false)
     private String marca;
+    
+    @Column(name = "linea", nullable = false)
     private String linea;
+    
+    @Column(name = "color", nullable = false)
     private String color;
+    
+    @Column(name = "modelo", nullable = false)
     private Integer modelo;
 
     public Automovil() {
