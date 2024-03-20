@@ -46,29 +46,29 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 
-        BotonRegistro.setBackground(new java.awt.Color(153, 255, 102));
+        BotonRegistro.setBackground(new java.awt.Color(51, 204, 0));
         BotonRegistro.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonRegistro.setForeground(new java.awt.Color(153, 255, 102));
+        BotonRegistro.setForeground(new java.awt.Color(255, 255, 255));
         BotonRegistro.setText("REGISTRO");
 
-        BotonLicencias.setBackground(new java.awt.Color(153, 255, 102));
+        BotonLicencias.setBackground(new java.awt.Color(51, 204, 0));
         BotonLicencias.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonLicencias.setForeground(new java.awt.Color(153, 255, 102));
+        BotonLicencias.setForeground(new java.awt.Color(255, 255, 255));
         BotonLicencias.setText("LICENCIAS");
 
-        BotonPlacas.setBackground(new java.awt.Color(153, 255, 102));
+        BotonPlacas.setBackground(new java.awt.Color(51, 204, 0));
         BotonPlacas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonPlacas.setForeground(new java.awt.Color(153, 255, 102));
+        BotonPlacas.setForeground(new java.awt.Color(255, 255, 255));
         BotonPlacas.setText("PLACAS");
 
-        BotonConsultas.setBackground(new java.awt.Color(153, 255, 102));
+        BotonConsultas.setBackground(new java.awt.Color(51, 204, 0));
         BotonConsultas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonConsultas.setForeground(new java.awt.Color(153, 255, 102));
+        BotonConsultas.setForeground(new java.awt.Color(255, 255, 255));
         BotonConsultas.setText("CONSULTA");
 
-        BotonReportes.setBackground(new java.awt.Color(153, 255, 102));
+        BotonReportes.setBackground(new java.awt.Color(51, 204, 0));
         BotonReportes.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonReportes.setForeground(new java.awt.Color(153, 255, 102));
+        BotonReportes.setForeground(new java.awt.Color(255, 255, 255));
         BotonReportes.setText("REPORTES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
