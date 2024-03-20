@@ -8,6 +8,8 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
 
     /**
      * Creates new form DlgPlacasNuevas
+     * @param parent
+     * @param modal
      */
     public DlgPlacasNuevas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
