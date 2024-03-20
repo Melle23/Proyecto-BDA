@@ -1,4 +1,4 @@
-package agenciafiscalpersistencia;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Calendar;

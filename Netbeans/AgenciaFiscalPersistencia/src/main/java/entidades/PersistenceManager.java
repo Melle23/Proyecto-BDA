@@ -1,4 +1,4 @@
-package agenciafiscalpersistencia;
+package entidades;
 
 /**
  * 
