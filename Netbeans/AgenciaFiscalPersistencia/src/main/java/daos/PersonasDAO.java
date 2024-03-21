@@ -4,7 +4,8 @@
  */
 package daos;
 
-import dtos.PersonasDTO;
+import entidades.Persona;
+
 
 /**
  *
@@ -13,7 +14,7 @@ import dtos.PersonasDTO;
 public class PersonasDAO implements IPersonaDAO{
 
     @Override
-    public void RegistrarPersona(PersonasDTO persona) {
+    public void RegistrarPersona(Persona persona) {
         
     }
     

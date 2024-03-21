@@ -152,7 +152,7 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     private void BotonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistro1ActionPerformed
         // TODO add your handling code here:
-        personaAgregar=new PersonasDTO(campoRFC.getText(),campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(),)
+        personaAgregar=new PersonasDTO(campoRFC.getText(),campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText());
         persona.RegistrarPersona(persona);
         control.desplegarDlgLicencia();
         dispose();

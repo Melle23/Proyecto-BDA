@@ -4,7 +4,9 @@
  */
 package daos;
 
-import dtos.LicenciaDTO;
+import entidades.Licencia;
+
+
 
 /**
  *
@@ -12,5 +14,5 @@ import dtos.LicenciaDTO;
  */
 public interface ILicenciasDAO {
 
-  public void RegistrarLicencia(LicenciaDTO licencia);
+  public void RegistrarLicencia(Licencia licencia);
 }

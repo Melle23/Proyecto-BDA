@@ -17,6 +17,14 @@ public class LicenciaDTO {
     Float costo;
     Date FechaExpedicion;
 
+    public LicenciaDTO(String RFC, String tipo, int vigencia, Float costo, Date FechaExpedicion) {
+        this.RFC = RFC;
+        this.tipo = tipo;
+        this.vigencia = vigencia;
+        this.costo = costo;
+        this.FechaExpedicion = FechaExpedicion;
+    }
+
   
 
     public String getRFC() {
@@ -25,6 +33,22 @@ public class LicenciaDTO {
 
     public void setRFC(String RFC) {
         this.RFC = RFC;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(int vigencia) {
+        this.vigencia = vigencia;
     }
 
 

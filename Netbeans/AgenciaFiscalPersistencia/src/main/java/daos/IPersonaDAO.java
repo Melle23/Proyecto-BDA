@@ -4,7 +4,9 @@
  */
 package daos;
 
-import dtos.PersonasDTO;
+import entidades.Persona;
+
+
 
 /**
  *
@@ -12,5 +14,5 @@ import dtos.PersonasDTO;
  */
 public interface IPersonaDAO {
     
-      public void RegistrarPersona(PersonasDTO persona);
+      public void RegistrarPersona(Persona persona);
 }
