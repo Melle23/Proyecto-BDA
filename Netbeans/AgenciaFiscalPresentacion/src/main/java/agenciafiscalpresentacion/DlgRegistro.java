@@ -1,10 +1,13 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import consultas.ConsultasPersonas;
+import consultas.IConsultasPersonas;
 import daos.IPersonaDAO;
 import daos.PersonasDAO;
 import dtos.PersonasDTO;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +16,7 @@ import java.util.Date;
 public class DlgRegistro extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
-    IPersonaDAO persona;
-       
+       IConsultasPersonas personaConsulta;
     
     /**
      * Creates new form DlgRegistro
@@ -23,13 +25,14 @@ public class DlgRegistro extends javax.swing.JDialog {
      */
     public DlgRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        persona=new PersonasDAO();
+       
         initComponents();
 
     }
 
     public DlgRegistro() {
         initComponents();
+        personaConsulta=new ConsultasPersonas();
         this.setVisible(true);
     }
 
@@ -55,9 +58,12 @@ public class DlgRegistro extends javax.swing.JDialog {
         campoApellidoM = new javax.swing.JTextField();
         campoTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        BotonRegreso = new javax.swing.JButton();
         BotonRegistro = new javax.swing.JButton();
         BotonRegistro1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        campoCurp = new javax.swing.JTextField();
+        date = new com.toedter.calendar.JDateChooser();
+        BotonRegreso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,43 +76,36 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("RFC:");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, 24));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 24));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, 24));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, 24));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Apellido paterno:");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, 24));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, 24));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Apellido materno:");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 24));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, 24));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Telefono:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, 24));
-        jPanel2.add(campoRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 219, -1));
-        jPanel2.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 219, -1));
-        jPanel2.add(campoApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 219, -1));
-        jPanel2.add(campoApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 219, -1));
-        jPanel2.add(campoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 219, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 24));
+        jPanel2.add(campoRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 219, -1));
+        jPanel2.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 219, -1));
+        jPanel2.add(campoApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 219, -1));
+        jPanel2.add(campoApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 219, -1));
+        jPanel2.add(campoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 219, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Fecha Nacimiento:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 610, 380));
-
-        BotonRegreso.setBackground(new java.awt.Color(153, 255, 102));
-        BotonRegreso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonRegreso.setForeground(new java.awt.Color(153, 255, 102));
-        jPanel1.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 47, -1));
 
         BotonRegistro.setBackground(new java.awt.Color(51, 153, 0));
         BotonRegistro.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -117,7 +116,7 @@ public class DlgRegistro extends javax.swing.JDialog {
                 BotonRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 250, 42));
+        jPanel2.add(BotonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 260, 40));
 
         BotonRegistro1.setBackground(new java.awt.Color(51, 153, 0));
         BotonRegistro1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -128,7 +127,20 @@ public class DlgRegistro extends javax.swing.JDialog {
                 BotonRegistro1ActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, 42));
+        jPanel2.add(BotonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, 42));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("CURP:");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
+        jPanel2.add(campoCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 220, -1));
+        jPanel2.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 640, 430));
+
+        BotonRegreso.setBackground(new java.awt.Color(153, 255, 102));
+        BotonRegreso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        BotonRegreso.setForeground(new java.awt.Color(153, 255, 102));
+        jPanel1.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 47, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,9 +164,17 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     private void BotonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistro1ActionPerformed
         // TODO add your handling code here:
-        personaAgregar=new PersonasDTO(campoRFC.getText(),campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText());
-        persona.RegistrarPersona(persona);
+        if(campoRFC.getText().isEmpty()||campoNombre.getText().isEmpty()|| campoApellidoM.getText().isEmpty()||campoApellidoP.getText().isEmpty()||campoTelefono.getText().isEmpty()||date.getDate()==null||campoCurp.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Por favor,complete todos los espcios", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }else{
+        //guardando en un DTO
+        PersonasDTO personaAgregar=new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(),date.getDate(),campoCurp.getText());
+        
+        personaConsulta.registroPersona(personaAgregar);
+        
+         JOptionPane.showMessageDialog(this,"Persona agregada con exito", "confirmacion", JOptionPane.INFORMATION_MESSAGE);
         control.desplegarDlgLicencia();
+        }
         dispose();
     }//GEN-LAST:event_BotonRegistro1ActionPerformed
 
@@ -206,15 +226,18 @@ public class DlgRegistro extends javax.swing.JDialog {
     private javax.swing.JButton BotonRegreso;
     private javax.swing.JTextField campoApellidoM;
     private javax.swing.JTextField campoApellidoP;
+    private javax.swing.JTextField campoCurp;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoRFC;
     private javax.swing.JTextField campoTelefono;
+    private com.toedter.calendar.JDateChooser date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

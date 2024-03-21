@@ -17,15 +17,19 @@ public class PersonasDTO {
     String ApellidoP;
     String Telefono;
     Date FechaNacimiento;
+    String Curp;
 
-    public PersonasDTO(String RFC, String Nombre, String ApellidoM, String ApellidoP, String Telefono, Date FechaNacimiento) {
+    public PersonasDTO(String RFC, String Nombre, String ApellidoM, String ApellidoP, String Telefono, Date FechaNacimiento, String Curp) {
         this.RFC = RFC;
         this.Nombre = Nombre;
         this.ApellidoM = ApellidoM;
         this.ApellidoP = ApellidoP;
         this.Telefono = Telefono;
         this.FechaNacimiento = FechaNacimiento;
+        this.Curp = Curp;
     }
+
+   
 
     public String getRFC() {
         return RFC;
@@ -73,6 +77,14 @@ public class PersonasDTO {
 
     public void setFechaNacimiento(Date FechaNacimiento) {
         this.FechaNacimiento = FechaNacimiento;
+    }
+
+    public String getCurp() {
+        return Curp;
+    }
+
+    public void setCurp(String Curp) {
+        this.Curp = Curp;
     }
     
     
