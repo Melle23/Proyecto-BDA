@@ -6,6 +6,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,12 +47,12 @@ public class Licencia implements Serializable {
 
     @Column(name="FechaExpedicion")
 @Temporal(TemporalType.DATE)
-    private Calendar fechaExpedicion;
+    private Date fechaExpedicion;
     
     public Licencia() {
     }
 
-    public Licencia(String RFC, Persona persona, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Calendar fechaExpedicion) {
+    public Licencia(String RFC, Persona persona, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Date fechaExpedicion) {
         this.RFC = RFC;
         this.persona = persona;
         this.tipo = tipo;
@@ -85,11 +86,11 @@ public class Licencia implements Serializable {
         this.persona = persona;
     }
 
-    public Calendar getFechaExpedicion() {
+    public Date getFechaExpedicion() {
         return fechaExpedicion;
     }
 
-    public void setFechaExpedicion(Calendar fechaExpedicion) {
+    public void setFechaExpedicion(Date fechaExpedicion) {
         this.fechaExpedicion = fechaExpedicion;
     }
 
@@ -109,36 +110,36 @@ public class Licencia implements Serializable {
         this.vigencia = vigencia;
     }
 //
-//    public int calcularCosto() {
-//        int costo = 0;
-//
-//        if (tipo == EnumTipoLicencia.NORMAL) {
-//            switch (vigencia) {
-//                case UN_ANIO:
-//                    costo = EnumCostos.UN_ANIO_NORMAL.getCosto();
-//                    break;
-//                case DOS_ANIOS:
-//                    costo = EnumCostos.DOS_ANIOS_NORMAL.getCosto();
-//                    break;
-//                case TRES_ANIOS:
-//                    costo = EnumCostos.TRES_ANIOS_NORMAL.getCosto();
-//                    break;
-//            }
-//        } else if (tipo == EnumTipoLicencia.DISCAPACITADOS) {
-//            switch (vigencia) {
-//                case UN_ANIO:
-//                    costo = EnumCostos.UN_ANIO_DISCAPACITADOS.getCosto();
-//                    break;
-//                case DOS_ANIOS:
-//                    costo = EnumCostos.DOS_ANIOS_DISCAPACITADOS.getCosto();
-//                    break;
-//                case TRES_ANIOS:
-//                    costo = EnumCostos.TRES_ANIOS_DISCAPACITADOS.getCosto();
-//                    break;
-//            }
-//        }
-//        return costo;
-//    }
+    public int calcularCosto() {
+        int costo = 0;
+
+        if (tipo == EnumTipoLicencia.NORMAL) {
+            switch (vigencia) {
+                case UNO:
+                    costo = EnumCostos.DOS_ANIOS_NORMAL.getCosto();
+                    break;
+                case DOS:
+                    costo = EnumCostos.DOS_ANIOS_NORMAL.getCosto();
+                    break;
+                case TRES:
+                    costo = EnumCostos.TRES_ANIOS_NORMAL.getCosto();
+                    break;
+            }
+        } else if (tipo == EnumTipoLicencia.DISCAPACITADOS) {
+            switch (vigencia) {
+                case UNO:
+                    costo = EnumCostos.UN_ANIO_DISCAPACITADOS.getCosto();
+                    break;
+                case DOS:
+                    costo = EnumCostos.DOS_ANIOS_DISCAPACITADOS.getCosto();
+                    break;
+                case TRES:
+                    costo = EnumCostos.TRES_ANIOS_DISCAPACITADOS.getCosto();
+                    break;
+            }
+        }
+        return costo;
+    }
 
 }
 

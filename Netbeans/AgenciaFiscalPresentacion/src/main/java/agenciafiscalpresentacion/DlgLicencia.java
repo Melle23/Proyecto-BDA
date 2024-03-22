@@ -1,7 +1,9 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
-import entidades.EnumVigenciaLicencia;
+import consultas.ConsultasLicencias;
+import consultas.IConsultasLicencias;
+
 
 /**
  *
@@ -10,8 +12,8 @@ import entidades.EnumVigenciaLicencia;
 public class DlgLicencia extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
-    
-    /**
+    IConsultasLicencias personaConsulta;  
+/**
      * Creates new form DlgLicencia
      *
      * @param parent
@@ -24,6 +26,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     public DlgLicencia() {
         initComponents();
+        this.personaConsulta=new ConsultasLicencias();
         this.setVisible(true);
     }
 
@@ -93,6 +96,11 @@ public class DlgLicencia extends javax.swing.JDialog {
         jComboBoxVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 año", "2 años", "3 años" }));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         BotonRegreso.setBackground(new java.awt.Color(153, 255, 102));
         BotonRegreso.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
@@ -205,6 +213,10 @@ public class DlgLicencia extends javax.swing.JDialog {
         control.desplegarRegistro();
         dispose();
     }//GEN-LAST:event_BotonRegresoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

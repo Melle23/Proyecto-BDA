@@ -4,6 +4,8 @@
  */
 package dtos;
 
+import entidades.EnumTipoLicencia;
+import entidades.EnumVigenciaLicencia;
 import java.util.Date;
 
 /**
@@ -12,19 +14,18 @@ import java.util.Date;
  */
 public class LicenciaDTO {
     String RFC;
-    String tipo;
-    int vigencia;
+    EnumTipoLicencia tipo;
+    EnumVigenciaLicencia vigencia;
     Float costo;
     Date FechaExpedicion;
 
-    public LicenciaDTO(String RFC, String tipo, int vigencia, Float costo, Date FechaExpedicion) {
+    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaExpedicion) {
         this.RFC = RFC;
         this.tipo = tipo;
         this.vigencia = vigencia;
         this.costo = costo;
         this.FechaExpedicion = FechaExpedicion;
     }
-
   
 
     public String getRFC() {
@@ -35,24 +36,22 @@ public class LicenciaDTO {
         this.RFC = RFC;
     }
 
-    public String getTipo() {
+    public EnumTipoLicencia getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(EnumTipoLicencia tipo) {
         this.tipo = tipo;
     }
 
-    public int getVigencia() {
+    public EnumVigenciaLicencia getVigencia() {
         return vigencia;
     }
 
-    public void setVigencia(int vigencia) {
+    public void setVigencia(EnumVigenciaLicencia vigencia) {
         this.vigencia = vigencia;
     }
 
-
-  
 
     public Float getCosto() {
         return costo;

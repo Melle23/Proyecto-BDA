@@ -158,6 +158,25 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
         // TODO add your handling code here:
+        if(campoRFC.getText().isEmpty()||campoNombre.getText().isEmpty()|| campoApellidoM.getText().isEmpty()||campoApellidoP.getText().isEmpty()||campoTelefono.getText().isEmpty()||date.getDate()==null||campoCurp.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Por favor,complete todos los espcios", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }else{
+        //guardando en un DTO
+        PersonasDTO personaAgregar=new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(),date.getDate(),campoCurp.getText());
+        
+        personaConsulta.registroPersona(personaAgregar);
+        
+         JOptionPane.showMessageDialog(this,"Persona agregada con exito", "confirmacion", JOptionPane.INFORMATION_MESSAGE);
+        campoRFC.setText("");
+        campoApellidoM.setText("");
+        campoApellidoP.setText("");
+        campoCurp.setText("");
+        campoNombre.setText("");
+        campoTelefono.setText("");
+        date.setDate(null);
+        
+        }
+       
         control.desplegarMenu();
         dispose();
     }//GEN-LAST:event_BotonRegistroActionPerformed

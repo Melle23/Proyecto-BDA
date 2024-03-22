@@ -10,18 +10,27 @@ package entidades;
  * @author delll
  */
 public enum EnumVigenciaLicencia {
-    UN_ANIO(1),
-    DOS_ANIOS(2),
-    TRES_ANIOS(3);
+     UNO("uno", 1),
+    DOS("dos", 2),
+    TRES("tres", 3);
 
-    private final int anios;
+     private final String texto;
+    private final int anio;
 
-    EnumVigenciaLicencia(int anios) {
-        this.anios = anios;
+    private EnumVigenciaLicencia(String texto, int anio) {
+        this.texto = texto;
+        this.anio = anio;
     }
 
-    public int getAnios() {
-        return anios;
+    public static int obtenerEntero(String texto) {
+        for (EnumVigenciaLicencia valor : values()) {
+            if (valor.texto.equalsIgnoreCase(texto)) {
+                return valor.anio;
+            }
+        }
+        throw new IllegalArgumentException(" no es válido: " + texto);
     }
+
+    
 }
 
