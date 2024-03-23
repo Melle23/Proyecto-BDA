@@ -1,4 +1,5 @@
-package agenciafiscalpersistencia;
+
+package entidades;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -20,30 +21,30 @@ import javax.persistence.TemporalType;
  * @author delll
  */
 @Entity
-@Table(name = "Licencias")
+@Table(name="Licencias")
 public class Licencia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "RFC", length = 13)
+    
+    @Column(name="RFC",length = 13)
     String RFC;
-
+    
     @ManyToOne
     @JoinColumn(name = "id_persona")
     private Persona persona;
-
+     
     @Enumerated(EnumType.STRING)
     private EnumTipoLicencia tipo;
 
     @Enumerated(EnumType.STRING)
     private EnumVigenciaLicencia vigencia;
 
-    @Column(name = "FechaExpedicion")
-    @Temporal(TemporalType.DATE)
+    @Column(name="FechaExpedicion")
+@Temporal(TemporalType.DATE)
     private Calendar fechaExpedicion;
-
+    
     public Licencia() {
     }
 
@@ -55,14 +56,14 @@ public class Licencia implements Serializable {
         this.fechaExpedicion = fechaExpedicion;
     }
 
-    public Long getId() {
+   
 
+   public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-
     }
 
     public String getRFC() {
@@ -137,7 +138,10 @@ public class Licencia implements Serializable {
 //    }
 
 }
-    
-    
 
+  
+   
+
+    
+    
 

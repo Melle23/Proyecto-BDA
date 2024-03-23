@@ -1,4 +1,4 @@
-package agenciafiscalpersistencia.exceptions;
+package ControladoraPersistencia.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package agenciaFiscal.controladores;
+package ControladoraPersistencia;
 
-import agenciafiscalpersistencia.Persona;
-import agenciafiscalpersistencia.exceptions.NonexistentEntityException;
+import ControladoraPersistencia.exceptions.NonexistentEntityException;
+import entidades.Persona;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,14 +21,11 @@ public class PersonaJpaController implements Serializable {
     public PersonaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-
-    public PersonaJpaController() {
-        emf = Persistence.createEntityManagerFactory("ConexionPU");     
-    }
-    
-    
     private EntityManagerFactory emf = null;
 
+    public PersonaJpaController() {
+        emf = Persistence.createEntityManagerFactory("ConexionPU");
+    }
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
