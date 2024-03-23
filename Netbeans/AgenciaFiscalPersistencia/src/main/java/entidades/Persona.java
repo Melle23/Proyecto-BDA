@@ -1,7 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,19 +40,25 @@ public class Persona implements Serializable {
 
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
-    private Calendar fechaNacimiento;
+    private Date fechaNacimiento;
+    
+    @Column(name = "curp", nullable = false, length = 18)
+    private String curp;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellidoP, String apellidoM, String telefono, String rfc, Calendar fechaNacimiento) {
+    public Persona(String nombre, String apellidoP, String apellidoM, String telefono, String rfc, Date fechaNacimiento, String curp) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
         this.rfc = rfc;
         this.fechaNacimiento = fechaNacimiento;
+        this.curp = curp;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -102,17 +108,27 @@ public class Persona implements Serializable {
         this.rfc = rfc;
     }
 
-    public Calendar getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Calendar fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", rfc=" + rfc + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", rfc=" + rfc + ", fechaNacimiento=" + fechaNacimiento + ", curp=" + curp + '}';
     }
+
+    
 
 }
