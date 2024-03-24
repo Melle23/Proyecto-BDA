@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package entidades;
 
 import java.io.Serializable;
@@ -25,30 +26,30 @@ import javax.persistence.TemporalType;
  * @author delll
  */
 @Entity
-@Table(name="Licencias")
+@Table(name = "Licencias")
 public class Licencia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name="RFC",length = 13)
+
+    @Column(name = "RFC", length = 13)
     String RFC;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_persona")
     private Persona persona;
-     
+
     @Enumerated(EnumType.STRING)
     private EnumTipoLicencia tipo;
 
     @Enumerated(EnumType.STRING)
     private EnumVigenciaLicencia vigencia;
 
-    @Column(name="FechaExpedicion")
-@Temporal(TemporalType.DATE)
+    @Column(name = "FechaExpedicion")
+    @Temporal(TemporalType.DATE)
     private Date fechaExpedicion;
-    
+
     public Licencia() {
     }
 
@@ -60,9 +61,7 @@ public class Licencia implements Serializable {
         this.fechaExpedicion = fechaExpedicion;
     }
 
-   
-
-   public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -110,6 +109,7 @@ public class Licencia implements Serializable {
         this.vigencia = vigencia;
     }
 //
+
     public int calcularCosto() {
         int costo = 0;
 
@@ -142,10 +142,3 @@ public class Licencia implements Serializable {
     }
 
 }
-
-  
-   
-
-    
-    
-

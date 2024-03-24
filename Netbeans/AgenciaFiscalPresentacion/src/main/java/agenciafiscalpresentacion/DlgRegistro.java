@@ -63,7 +63,8 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         campoCurp = new javax.swing.JTextField();
         date = new com.toedter.calendar.JDateChooser();
-        BotonRegreso = new javax.swing.JButton();
+        BotonLimpiar = new javax.swing.JButton();
+        BotonRegreso1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -133,14 +134,29 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel7.setText("CURP:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
         jPanel2.add(campoCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 220, -1));
-        jPanel2.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
+        jPanel2.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 130, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 640, 430));
+        BotonLimpiar.setBackground(new java.awt.Color(153, 255, 102));
+        BotonLimpiar.setFont(new java.awt.Font("Segoe UI Black", 1, 8)); // NOI18N
+        BotonLimpiar.setText("Limpiar");
+        BotonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BotonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 70, 30));
 
-        BotonRegreso.setBackground(new java.awt.Color(153, 255, 102));
-        BotonRegreso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonRegreso.setForeground(new java.awt.Color(153, 255, 102));
-        jPanel1.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 47, -1));
+        BotonRegreso1.setBackground(new java.awt.Color(153, 255, 102));
+        BotonRegreso1.setFont(new java.awt.Font("Segoe UI Black", 1, 8)); // NOI18N
+        BotonRegreso1.setText("Volver");
+        BotonRegreso1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonRegreso1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BotonRegreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 620, 410));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +170,7 @@ public class DlgRegistro extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
@@ -176,26 +193,56 @@ public class DlgRegistro extends javax.swing.JDialog {
         date.setDate(null);
         
         }
-       
+         
         control.desplegarMenu();
         dispose();
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
     private void BotonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistro1ActionPerformed
-        // TODO add your handling code here:
-        if(campoRFC.getText().isEmpty()||campoNombre.getText().isEmpty()|| campoApellidoM.getText().isEmpty()||campoApellidoP.getText().isEmpty()||campoTelefono.getText().isEmpty()||date.getDate()==null||campoCurp.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this,"Por favor,complete todos los espcios", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }else{
-        //guardando en un DTO
-        PersonasDTO personaAgregar=new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(),date.getDate(),campoCurp.getText());
+        // Verifica si los campos están vacíos
+    if(campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() ||
+       campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null ||
+       campoCurp.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
+    } else {
+        // Guarda el nombre del solicitante en una variable
+        String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
         
+        // Crear el DTO para guardar los datos
+        PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), 
+                                                      campoApellidoP.getText(), campoTelefono.getText(), date.getDate(), 
+                                                      campoCurp.getText());
+        
+        // Realiza el registro de la persona
         personaConsulta.registroPersona(personaAgregar);
         
-         JOptionPane.showMessageDialog(this,"Persona agregada con exito", "confirmacion", JOptionPane.INFORMATION_MESSAGE);
-        control.desplegarDlgLicencia();
-        }
+        // Mostrar mensaje de confirmación
+        JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Pasar a la pantalla de DlgLicencia
+        control.desplegarDlgLicencia(nombreSolicitante); // Pasa el nombre del solicitante como parámetro
+        
+        // Cierra esta ventana
         dispose();
+    }
     }//GEN-LAST:event_BotonRegistro1ActionPerformed
+
+    private void BotonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLimpiarActionPerformed
+        // TODO add your handling code here:
+        campoRFC.setText(" ");
+        campoNombre.setText(" ");
+        campoApellidoP.setText(" ");
+        campoApellidoM.setText(" ");
+        campoTelefono.setText(" ");
+        date.setDate(null);
+        campoCurp.setText(" ");
+    }//GEN-LAST:event_BotonLimpiarActionPerformed
+
+    private void BotonRegreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegreso1ActionPerformed
+        // TODO add your handling code here:
+        control.desplegarMenu();
+        dispose();
+    }//GEN-LAST:event_BotonRegreso1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,9 +287,10 @@ public class DlgRegistro extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonLimpiar;
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JButton BotonRegistro1;
-    private javax.swing.JButton BotonRegreso;
+    private javax.swing.JButton BotonRegreso1;
     private javax.swing.JTextField campoApellidoM;
     private javax.swing.JTextField campoApellidoP;
     private javax.swing.JTextField campoCurp;
