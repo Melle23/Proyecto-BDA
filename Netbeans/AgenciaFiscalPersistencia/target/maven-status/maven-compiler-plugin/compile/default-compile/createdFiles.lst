@@ -1,0 +1,12 @@
+entidades\AgenciaFiscalPersistencia.class
+entidades\EnumTipoLicencia.class
+daos\IPersonaDAO.class
+entidades\Licencia$1.class
+daos\ILicenciasDAO.class
+entidades\Licencia.class
+entidades\Persona.class
+entidades\PersistenceManager.class
+daos\LicenciasDAO.class
+daos\PersonasDAO.class
+entidades\EnumCostos.class
+entidades\EnumVigenciaLicencia.class

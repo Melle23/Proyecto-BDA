@@ -1,0 +1,7 @@
+consultas\ConsultasPersonas.class
+consultas\IConsultasLicencias.class
+com\mycompany\agenciafiscalnegocio\AgenciaFiscalNegocio.class
+consultas\ConsultasLicencias.class
+consultas\IConsultasPersonas.class
+dtos\LicenciaDTO.class
+dtos\PersonasDTO.class
