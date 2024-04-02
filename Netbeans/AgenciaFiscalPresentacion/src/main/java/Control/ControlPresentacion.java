@@ -28,9 +28,13 @@ public class ControlPresentacion {
 
     public void desplegarDlgLicencia(String nombreSolicitante) {
         DlgLicencia dlgLicencia = new DlgLicencia(null, true);
-        
+
         dlgLicencia.mostrarNombreSolicitante(nombreSolicitante); // Configura el nombre del solicitante en la siguiente ventana
         dlgLicencia.setVisible(true);
-        
+
+    }
+    
+    
+    public void personaPorRFC(){
     }
 }

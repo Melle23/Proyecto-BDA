@@ -21,18 +21,28 @@ public class LicenciasDAO implements ILicenciasDAO {
     @Override
     public void RegistrarLicencia(Licencia licencia) {
          EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            if(BuscarPersonaPoRFC(licencia.getRFC())!=null){
-                em.persist(licencia);
+    try {
+        em.getTransaction().begin();
+        // Verifica si la persona asociada a la licencia existe en la base de datos
+        Persona persona = BuscarPersonaPoRFC(licencia.getRFC());
+        if (persona != null) {
+            // Asigna la persona encontrada a la licencia
+            licencia.setPersona(persona);
+            // Persiste la licencia en la base de datos
+            System.out.println("DATOS EN LA BASE DE DATOS");
+            em.persist(licencia);
             em.getTransaction().commit();
-            }
-            
-           } finally {
-            em.close();
+        } else {
+            // Si la persona no existe, lanza una excepción o muestra un mensaje de error
+            // Aquí te dejo un ejemplo de cómo lanzar una excepción:
+            throw new IllegalArgumentException("La persona con RFC " + licencia.getRFC() + " no existe en la base de datos.");
         }
+    } finally {
+        em.close();
+    }
     }
 
+    //Capa persistencia persona
     @Override
     public Persona BuscarPersonaPoRFC(String rfc) {
            EntityManager em = emf.createEntityManager();
