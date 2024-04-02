@@ -4,15 +4,12 @@
  */
 package consultas;
 
-import dtos.LicenciaDTO;
-import entidades.Persona;
+import dtos.PersonasDTO;
 
 /**
  *
  * @author delll
  */
-public interface IConsultasLicencias {
-    public void registroLicencia(LicenciaDTO l);
-    public Persona  BuscaPersonaPorRFC(String rfc);
-    
+public interface IConsultasPersonas {
+    public void registroPersona(PersonasDTO p);
 }

@@ -16,17 +16,20 @@ public class ConsultasLicencias implements IConsultasLicencias {
 
     public ConsultasLicencias() {
         licencias=new LicenciasDAO();
-        persona=new Persona();
     }
     
     @Override
     public void registroLicencia(LicenciaDTO l) {
-       persona=licencias.BuscarPersonaPoRFC(l.getRFC());
+        persona=BuscaPersonaPorRFC(l.getRFC());
          Licencia nuevaLicencia=new Licencia(l.getRFC(), persona,l.getTipo(),l.getVigencia(),l.getFechaExpedicion());
         System.out.println("consultaLicencias");
         licencias.RegistrarLicencia(nuevaLicencia);
     }
 
-   
+    @Override
+    public Persona BuscaPersonaPorRFC(String rfc) {
+        return licencias.BuscarPersonaPoRFC(rfc);
+        
+    }
     
 }
