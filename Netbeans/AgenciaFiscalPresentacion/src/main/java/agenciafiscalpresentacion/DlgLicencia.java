@@ -6,9 +6,9 @@ import consultas.IConsultasLicencias;
 import daos.LicenciasDAO;
 import daos.PersonasDAO;
 import dtos.LicenciaDTO;
-import entidades.AgenciaFiscalPersistencia;
-import entidades.EnumTipoLicencia;
-import entidades.EnumVigenciaLicencia;
+//import entidades.AgenciaFiscalPersistencia;
+//import entidades.EnumTipoLicencia;
+//import entidades.EnumVigenciaLicencia;
 import entidades.Licencia;
 import entidades.Persona;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
     IConsultasLicencias personaConsulta;
-    EnumTipoLicencia licencia;
+    //EnumTipoLicencia licencia;
     private JComboBox<String> comboBox;
 
     /**
@@ -313,43 +313,43 @@ public class DlgLicencia extends javax.swing.JDialog {
         if (comboBoxTipo.getItemCount() == 0 || comboBoxVigencia.getItemCount() == 0) {
             JOptionPane.showMessageDialog(this, "Por favor elija una opción", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
-            String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
-            EnumTipoLicencia tipo;
-            switch (tipoSeleccionado) {
-                case "Si":
-                    tipo = EnumTipoLicencia.DISCAPACITADOS;
-                    break;
-                case "No":
-                    tipo = EnumTipoLicencia.NORMAL;
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-            }
-            String vigenciaSeleccionada = comboBoxVigencia.getSelectedItem().toString();
-            EnumVigenciaLicencia vigencia;
-            switch (vigenciaSeleccionada) {
-                case "1":
-                    vigencia = EnumVigenciaLicencia.UNO;
-                    break;
-                case "2":
-                    vigencia = EnumVigenciaLicencia.DOS;
-                    break;
-                case "3":
-                    vigencia = EnumVigenciaLicencia.TRES;
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(this, "Vigencia no válida", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-            }
-            Float importe = Float.valueOf(importeTexto);
+//            String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
+//            EnumTipoLicencia tipo;
+//            switch (tipoSeleccionado) {
+//                case "Si":
+//                    tipo = EnumTipoLicencia.DISCAPACITADOS;
+//                    break;
+//                case "No":
+//                    tipo = EnumTipoLicencia.NORMAL;
+//                    break;
+//                default:
+//                    JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
+//                    return;
+//            }
+//            String vigenciaSeleccionada = comboBoxVigencia.getSelectedItem().toString();
+//            EnumVigenciaLicencia vigencia;
+//            switch (vigenciaSeleccionada) {
+//                case "1":
+//                    vigencia = EnumVigenciaLicencia.UNO;
+//                    break;
+//                case "2":
+//                    vigencia = EnumVigenciaLicencia.DOS;
+//                    break;
+//                case "3":
+//                    vigencia = EnumVigenciaLicencia.TRES;
+//                    break;
+//                default:
+//                    JOptionPane.showMessageDialog(this, "Vigencia no válida", "Error", JOptionPane.ERROR_MESSAGE);
+//                    return;
+//            }
+//            Float importe = Float.valueOf(importeTexto);
 
             LicenciasDAO licenciasDAO = new LicenciasDAO();
             Persona persona = licenciasDAO.BuscarPersonaPoRFC(txtRFC.getText());
 
-            Licencia licencias = new Licencia(txtRFC.getText(), persona, tipo, vigencia, fechaVencimiento.getDate());
+         //  Licencia licencias = new Licencia(persona, "normal", "uno", fechaVencimiento.getDate(), 0f);
 
-            licenciasDAO.RegistrarLicencia(licencias);
+//            licenciasDAO.RegistrarLicencia(licencias);
             JOptionPane.showMessageDialog(this, "Licencia agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
 
         }
@@ -386,84 +386,84 @@ public class DlgLicencia extends javax.swing.JDialog {
     private void comboBoxVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVigenciaActionPerformed
 //         TODO add your handling code here:
 
-        String opcionSeleccionada = comboBoxVigencia.getSelectedItem().toString();
-
-        // Eliminar todos los caracteres que no son dígitos de la cadena
-        opcionSeleccionada = opcionSeleccionada.replaceAll("\\D", "");
-
-        int anio;
-
-        try {
-            // Convertir la cadena a un entero, se coloca el numero directamente en el parametro
-            anio = Integer.parseInt(opcionSeleccionada);
-
-            // El switch
-            switch (opcionSeleccionada) {
-                case "1":
-                    anio = EnumVigenciaLicencia.UNO.obtenerEntero("uno");
-                    break;
-                case "2":
-                    anio = EnumVigenciaLicencia.DOS.obtenerEntero("dos");
-                    break;
-                case "3":
-                    anio = EnumVigenciaLicencia.TRES.obtenerEntero("tres");
-                    break;
-                default:
-                    throw new IllegalArgumentException("Opción inválida: " + opcionSeleccionada);
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Opción inválida: ");
-        }
-        int importe;
-
-        if (opcionSeleccionada.equalsIgnoreCase("1")) {
-            importe = 600;
-        } else if (opcionSeleccionada.equalsIgnoreCase("2")) {
-            importe = 900;
-        } else if (opcionSeleccionada.equalsIgnoreCase("3")) {
-            importe = 1100;
-        } else {
-            return;
-        }
-
-        txtImporte.setText(String.valueOf(importe));
-
+//        String opcionSeleccionada = comboBoxVigencia.getSelectedItem().toString();
+//
+//        // Eliminar todos los caracteres que no son dígitos de la cadena
+//        opcionSeleccionada = opcionSeleccionada.replaceAll("\\D", "");
+//
+//        int anio;
+//
+//        try {
+//            // Convertir la cadena a un entero, se coloca el numero directamente en el parametro
+//            anio = Integer.parseInt(opcionSeleccionada);
+//
+//            // El switch
+//            switch (opcionSeleccionada) {
+//                case "1":
+//                    anio = EnumVigenciaLicencia.UNO.obtenerEntero("uno");
+//                    break;
+//                case "2":
+//                    anio = EnumVigenciaLicencia.DOS.obtenerEntero("dos");
+//                    break;
+//                case "3":
+//                    anio = EnumVigenciaLicencia.TRES.obtenerEntero("tres");
+//                    break;
+//                default:
+//                    throw new IllegalArgumentException("Opción inválida: " + opcionSeleccionada);
+//            }
+//        } catch (NumberFormatException e) {
+//            throw new IllegalArgumentException("Opción inválida: ");
+//        }
+//        int importe;
+//
+//        if (opcionSeleccionada.equalsIgnoreCase("1")) {
+//            importe = 600;
+//        } else if (opcionSeleccionada.equalsIgnoreCase("2")) {
+//            importe = 900;
+//        } else if (opcionSeleccionada.equalsIgnoreCase("3")) {
+//            importe = 1100;
+//        } else {
+//            return;
+//        }
+//
+//        txtImporte.setText(String.valueOf(importe));
+//
     }//GEN-LAST:event_comboBoxVigenciaActionPerformed
 
     private void comboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoActionPerformed
-
-        String discapacidadSeleccionada = comboBoxTipo.getSelectedItem().toString();
-
-        int importe;
-
-        if (discapacidadSeleccionada.equals("Si")) {
-            if (comboBoxVigencia.getSelectedItem().toString().equals("1")) {
-                importe = 200;
-            } else if (comboBoxVigencia.getSelectedItem().toString().equals("2")) {
-                importe = 500;
-            } else if (comboBoxVigencia.getSelectedItem().toString().equals("3")) {
-                importe = 700;
-            } else {
-
-                throw new IllegalArgumentException("Vigencia inválida");
-            }
-        } else if (discapacidadSeleccionada.equals("No")) {
-            if (comboBoxVigencia.getSelectedItem().toString().equals("1")) {
-                importe = 600;
-            } else if (comboBoxVigencia.getSelectedItem().toString().equals("2")) {
-                importe = 900;
-            } else if (comboBoxVigencia.getSelectedItem().toString().equals("3")) {
-                importe = 1100;
-            } else {
-
-                throw new IllegalArgumentException("Vigencia inválida");
-            }
-        } else {
-            return;
-        }
-
-        txtImporte.setText(String.valueOf(importe));
-
+//
+//        String discapacidadSeleccionada = comboBoxTipo.getSelectedItem().toString();
+//
+//        int importe;
+//
+//        if (discapacidadSeleccionada.equals("Si")) {
+//            if (comboBoxVigencia.getSelectedItem().toString().equals("1")) {
+//                importe = 200;
+//            } else if (comboBoxVigencia.getSelectedItem().toString().equals("2")) {
+//                importe = 500;
+//            } else if (comboBoxVigencia.getSelectedItem().toString().equals("3")) {
+//                importe = 700;
+//            } else {
+//
+//                throw new IllegalArgumentException("Vigencia inválida");
+//            }
+//        } else if (discapacidadSeleccionada.equals("No")) {
+//            if (comboBoxVigencia.getSelectedItem().toString().equals("1")) {
+//                importe = 600;
+//            } else if (comboBoxVigencia.getSelectedItem().toString().equals("2")) {
+//                importe = 900;
+//            } else if (comboBoxVigencia.getSelectedItem().toString().equals("3")) {
+//                importe = 1100;
+//            } else {
+//
+//                throw new IllegalArgumentException("Vigencia inválida");
+//            }
+//        } else {
+//            return;
+//        }
+//
+//        txtImporte.setText(String.valueOf(importe));
+//
     }//GEN-LAST:event_comboBoxTipoActionPerformed
 
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed

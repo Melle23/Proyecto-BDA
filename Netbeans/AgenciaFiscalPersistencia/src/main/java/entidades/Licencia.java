@@ -7,6 +7,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,8 +45,8 @@ public class Licencia implements Serializable {
     private String tipo;
 
     @Column(name = "FechaExpedicion")
-    @Temporal(TemporalType.TIME)
-    private LocalDate fechaExpedicion;
+    @Temporal(TemporalType.DATE)
+    private Date fechaExpedicion;
     
      @Column(name = "costo")
     private Float costo;
@@ -55,7 +56,7 @@ public class Licencia implements Serializable {
     public Licencia() {
     }
 
-    public Licencia( Persona persona, String vigencia, String tipo, LocalDate fechaExpedicion, Float costo) {
+    public Licencia( Persona persona, String vigencia, String tipo, Date fechaExpedicion, Float costo) {
       
         this.persona = persona;
         this.vigencia = vigencia;
@@ -64,44 +65,44 @@ public class Licencia implements Serializable {
         this.costo = costo;
     }
 
-    public void calcularCosto() {
-     LocalDate fechaActual = LocalDate.now();
-        int añosVigencia = fechaExpedicion.until(fechaActual).getYears();
-        if (añosVigencia < 1 || añosVigencia > 3) {
-            throw new IllegalArgumentException("La vigencia de la licencia debe estar entre 1 y 3 años.");
-        }
-        if (this.tipo.equals("normal")) {
-            switch (añosVigencia) {
-                case 1:
-                    this.costo = 600f;
-                    break;
-                case 2:
-                    this.costo = 900f;
-                    break;
-                case 3:
-                    this.costo = 1100f;
-                    break;
-                default:
-                    throw new IllegalStateException("Vigencia de licencia no válida: " + añosVigencia);
-            }
-        } else if (this.tipo.equals("discapacitados")) {
-            switch (añosVigencia) {
-                case 1:
-                    this.costo = 200f;
-                    break;
-                case 2:
-                    this.costo = 500f;
-                    break;
-                case 3:
-                    this.costo = 700f;
-                    break;
-                default:
-                    throw new IllegalStateException("Vigencia de licencia no válida: " + añosVigencia);
-            }
-        } else {
-            throw new IllegalArgumentException("Tipo de licencia no válido: " + this.tipo);
-        }
-    }
+//    public void calcularCosto() {
+//     LocalDate fechaActual = LocalDate.now();
+//        int añosVigencia = fechaExpedicion.until(fechaActual).getYears();
+//        if (añosVigencia < 1 || añosVigencia > 3) {
+//            throw new IllegalArgumentException("La vigencia de la licencia debe estar entre 1 y 3 años.");
+//        }
+//        if (this.tipo.equals("normal")) {
+//            switch (añosVigencia) {
+//                case 1:
+//                    this.costo = 600f;
+//                    break;
+//                case 2:
+//                    this.costo = 900f;
+//                    break;
+//                case 3:
+//                    this.costo = 1100f;
+//                    break;
+//                default:
+//                    throw new IllegalStateException("Vigencia de licencia no válida: " + añosVigencia);
+//            }
+//        } else if (this.tipo.equals("discapacitados")) {
+//            switch (añosVigencia) {
+//                case 1:
+//                    this.costo = 200f;
+//                    break;
+//                case 2:
+//                    this.costo = 500f;
+//                    break;
+//                case 3:
+//                    this.costo = 700f;
+//                    break;
+//                default:
+//                    throw new IllegalStateException("Vigencia de licencia no válida: " + añosVigencia);
+//            }
+//        } else {
+//            throw new IllegalArgumentException("Tipo de licencia no válido: " + this.tipo);
+//        }
+//    }
 
     public Long getId() {
         return id;
@@ -137,11 +138,11 @@ public class Licencia implements Serializable {
         this.tipo = tipo;
     }
 
-    public LocalDate getFechaExpedicion() {
+    public Date getFechaExpedicion() {
         return fechaExpedicion;
     }
 
-    public void setFechaExpedicion(LocalDate fechaExpedicion) {
+    public void setFechaExpedicion(Date fechaExpedicion) {
         this.fechaExpedicion = fechaExpedicion;
     }
 

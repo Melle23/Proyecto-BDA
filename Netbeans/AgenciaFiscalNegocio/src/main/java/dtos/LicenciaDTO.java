@@ -6,6 +6,7 @@ package dtos;
 
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 /**
@@ -17,9 +18,9 @@ public class LicenciaDTO {
     String tipo;
     String vigencia;
     Float costo;
-    LocalDate FechaExpedicion;
+    Date FechaExpedicion;
 
-    public LicenciaDTO(String RFC, String tipo, String vigencia, Float costo, LocalDate FechaExpedicion) {
+    public LicenciaDTO(String RFC, String tipo, String vigencia, Float costo, Date FechaExpedicion) {
         this.RFC = RFC;
         this.tipo = tipo;
         this.vigencia = vigencia;
@@ -65,13 +66,14 @@ public class LicenciaDTO {
         this.costo = costo;
     }
 
-    public LocalDate getFechaExpedicion() {
+    public Date getFechaExpedicion() {
         return FechaExpedicion;
     }
 
-    public void setFechaExpedicion(LocalDate FechaExpedicion) {
+    public void setFechaExpedicion(Date FechaExpedicion) {
         this.FechaExpedicion = FechaExpedicion;
     }
-    
+
+   
     
 }

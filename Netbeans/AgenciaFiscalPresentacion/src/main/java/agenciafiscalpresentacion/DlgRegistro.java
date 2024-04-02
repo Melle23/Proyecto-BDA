@@ -3,10 +3,7 @@ package agenciafiscalpresentacion;
 import Control.ControlPresentacion;
 import consultas.ConsultasPersonas;
 import consultas.IConsultasPersonas;
-import daos.IPersonaDAO;
-import daos.PersonasDAO;
 import dtos.PersonasDTO;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
