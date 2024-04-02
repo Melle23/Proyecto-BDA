@@ -4,9 +4,9 @@
  */
 package dtos;
 
-import entidades.EnumTipoLicencia;
-import entidades.EnumVigenciaLicencia;
-import java.util.Date;
+
+import java.time.LocalDate;
+
 
 /**
  *
@@ -14,18 +14,37 @@ import java.util.Date;
  */
 public class LicenciaDTO {
     String RFC;
-    EnumTipoLicencia tipo;
-    EnumVigenciaLicencia vigencia;
+    String tipo;
+    String vigencia;
     Float costo;
-    Date FechaExpedicion;
+    LocalDate FechaExpedicion;
 
-    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaExpedicion) {
+    public LicenciaDTO(String RFC, String tipo, String vigencia, Float costo, LocalDate FechaExpedicion) {
         this.RFC = RFC;
         this.tipo = tipo;
         this.vigencia = vigencia;
         this.costo = costo;
         this.FechaExpedicion = FechaExpedicion;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
+    }
+    
+
+  
   
 
     public String getRFC() {
@@ -36,21 +55,6 @@ public class LicenciaDTO {
         this.RFC = RFC;
     }
 
-    public EnumTipoLicencia getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(EnumTipoLicencia tipo) {
-        this.tipo = tipo;
-    }
-
-    public EnumVigenciaLicencia getVigencia() {
-        return vigencia;
-    }
-
-    public void setVigencia(EnumVigenciaLicencia vigencia) {
-        this.vigencia = vigencia;
-    }
 
 
     public Float getCosto() {
@@ -61,11 +65,11 @@ public class LicenciaDTO {
         this.costo = costo;
     }
 
-    public Date getFechaExpedicion() {
+    public LocalDate getFechaExpedicion() {
         return FechaExpedicion;
     }
 
-    public void setFechaExpedicion(Date FechaExpedicion) {
+    public void setFechaExpedicion(LocalDate FechaExpedicion) {
         this.FechaExpedicion = FechaExpedicion;
     }
     

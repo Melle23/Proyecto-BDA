@@ -24,8 +24,9 @@ import javax.persistence.TemporalType;
 public class Persona implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "rfc", nullable = false, length = 13)
+    private String rfc;
+
 
     @Column(name = "nombre", nullable = false, length = 255)
     private String nombre;
@@ -39,9 +40,7 @@ public class Persona implements Serializable {
     @Column(name = "telefono", nullable = false, length = 16)
     private String telefono;
 
-    @Column(name = "rfc", nullable = false, length = 13)
-    private String rfc;
-
+   
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
@@ -59,22 +58,14 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(String nombre, String apellidoP, String apellidoM, String telefono, String rfc, Date fechaNacimiento, String curp) {
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaNacimiento, String curp) {
+        this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
-        this.rfc = rfc;
         this.fechaNacimiento = fechaNacimiento;
         this.curp = curp;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -151,8 +142,10 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", rfc=" + rfc + ", fechaNacimiento=" + fechaNacimiento + ", curp=" + curp + ", licencias=" + licencias + ", automoviles=" + automoviles + '}';
+        return "Persona{" + "rfc=" + rfc + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", curp=" + curp + ", licencias=" + licencias + ", automoviles=" + automoviles + '}';
     }
+
+  
 
    
 

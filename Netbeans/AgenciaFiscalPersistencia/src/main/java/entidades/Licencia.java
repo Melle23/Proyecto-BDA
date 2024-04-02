@@ -32,8 +32,6 @@ public class Licencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "RFC", length = 13)
-    String RFC;
 
     @ManyToOne
     @JoinColumn(name = "persona_rfc")
@@ -57,8 +55,8 @@ public class Licencia implements Serializable {
     public Licencia() {
     }
 
-    public Licencia(String RFC, Persona persona, String vigencia, String tipo, LocalDate fechaExpedicion, Float costo) {
-        this.RFC = RFC;
+    public Licencia( Persona persona, String vigencia, String tipo, LocalDate fechaExpedicion, Float costo) {
+      
         this.persona = persona;
         this.vigencia = vigencia;
         this.tipo = tipo;
@@ -113,13 +111,7 @@ public class Licencia implements Serializable {
         this.id = id;
     }
 
-    public String getRFC() {
-        return RFC;
-    }
-
-    public void setRFC(String RFC) {
-        this.RFC = RFC;
-    }
+ 
 
     public Persona getPersona() {
         return persona;
@@ -163,7 +155,7 @@ public class Licencia implements Serializable {
 
     @Override
     public String toString() {
-        return "Licencia{" + "id=" + id + ", RFC=" + RFC + ", persona=" + persona + ", vigencia=" + vigencia + ", tipo=" + tipo + ", fechaExpedicion=" + fechaExpedicion + ", costo=" + costo + '}';
+        return "Licencia{" + "id=" + id + ", persona=" + persona + ", vigencia=" + vigencia + ", tipo=" + tipo + ", fechaExpedicion=" + fechaExpedicion + ", costo=" + costo + '}';
     }
     
 }

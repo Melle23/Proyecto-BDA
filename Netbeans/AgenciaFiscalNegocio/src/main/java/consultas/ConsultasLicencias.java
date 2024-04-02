@@ -5,6 +5,7 @@ import daos.LicenciasDAO;
 import dtos.LicenciaDTO;
 import entidades.Licencia;
 import entidades.Persona;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,7 +22,7 @@ public class ConsultasLicencias implements IConsultasLicencias {
     @Override
     public void registroLicencia(LicenciaDTO l) {
         persona=BuscaPersonaPorRFC(l.getRFC());
-         Licencia nuevaLicencia=new Licencia(l.getRFC(), persona,l.getTipo(),l.getVigencia(),l.getFechaExpedicion());
+         Licencia nuevaLicencia=new Licencia(persona, l.getVigencia(), l.getTipo(),l.getFechaExpedicion(),l.getCosto());
         System.out.println("consultaLicencias");
         licencias.RegistrarLicencia(nuevaLicencia);
     }
