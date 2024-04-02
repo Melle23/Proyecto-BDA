@@ -313,7 +313,6 @@ public class DlgLicencia extends javax.swing.JDialog {
         if (comboBoxTipo.getItemCount() == 0 || comboBoxVigencia.getItemCount() == 0) {
             JOptionPane.showMessageDialog(this, "Por favor elija una opción", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
-            // Verificar el tipo de licencia seleccionado
             String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
             EnumTipoLicencia tipo;
             switch (tipoSeleccionado) {
@@ -325,10 +324,8 @@ public class DlgLicencia extends javax.swing.JDialog {
                     break;
                 default:
                     JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Salir del método si el tipo no es válido
+                    return;
             }
-
-            // Verificar la vigencia de la licencia seleccionada
             String vigenciaSeleccionada = comboBoxVigencia.getSelectedItem().toString();
             EnumVigenciaLicencia vigencia;
             switch (vigenciaSeleccionada) {
@@ -342,22 +339,19 @@ public class DlgLicencia extends javax.swing.JDialog {
                     vigencia = EnumVigenciaLicencia.TRES;
                     break;
                 default:
-                    JOptionPane.showMessageDialog(this, "Vigencia de licencia no válida", "Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Salir del método si la vigencia no es válida
+                    JOptionPane.showMessageDialog(this, "Vigencia no válida", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
             }
-
-            // Convertir el importe a Float
             Float importe = Float.valueOf(importeTexto);
 
-            // Obtener la persona asociada al RFC ingresado
             LicenciasDAO licenciasDAO = new LicenciasDAO();
             Persona persona = licenciasDAO.BuscarPersonaPoRFC(txtRFC.getText());
 
-            // Crear una instancia de Licencia con los datos proporcionados
-            Licencia licencias = new Licencia(txtRFC.getText(), persona, tipo, vigencia, new Date());
+            Licencia licencias = new Licencia(txtRFC.getText(), persona, tipo, vigencia, fechaVencimiento.getDate());
 
-            // Registrar la licencia
             licenciasDAO.RegistrarLicencia(licencias);
+            JOptionPane.showMessageDialog(this, "Licencia agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
