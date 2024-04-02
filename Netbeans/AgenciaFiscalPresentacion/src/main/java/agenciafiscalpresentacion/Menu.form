@@ -152,9 +152,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="LICENCIAS"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonLicenciasActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="BotonPlacas">
               <Properties>

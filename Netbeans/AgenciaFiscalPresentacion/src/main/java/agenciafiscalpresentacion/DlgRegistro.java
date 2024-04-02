@@ -16,23 +16,24 @@ import javax.swing.JOptionPane;
 public class DlgRegistro extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
-       IConsultasPersonas personaConsulta;
-    
+    IConsultasPersonas personaConsulta;
+
     /**
      * Creates new form DlgRegistro
+     *
      * @param parent
      * @param modal
      */
     public DlgRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-       
+
         initComponents();
 
     }
 
     public DlgRegistro() {
         initComponents();
-        personaConsulta=new ConsultasPersonas();
+        personaConsulta = new ConsultasPersonas();
         this.setVisible(true);
     }
 
@@ -175,56 +176,51 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
         // TODO add your handling code here:
-        if(campoRFC.getText().isEmpty()||campoNombre.getText().isEmpty()|| campoApellidoM.getText().isEmpty()||campoApellidoP.getText().isEmpty()||campoTelefono.getText().isEmpty()||date.getDate()==null||campoCurp.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this,"Por favor,complete todos los espcios", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }else{
-        //guardando en un DTO
-        PersonasDTO personaAgregar=new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(),date.getDate(),campoCurp.getText());
-        
-        personaConsulta.registroPersona(personaAgregar);
-        
-         JOptionPane.showMessageDialog(this,"Persona agregada con exito", "confirmacion", JOptionPane.INFORMATION_MESSAGE);
-        campoRFC.setText("");
-        campoApellidoM.setText("");
-        campoApellidoP.setText("");
-        campoCurp.setText("");
-        campoNombre.setText("");
-        campoTelefono.setText("");
-        date.setDate(null);
-        
+        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null || campoCurp.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor,complete todos los espcios", "Alerta", JOptionPane.WARNING_MESSAGE);
+        } else {
+            //guardando en un DTO
+            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(), date.getDate(), campoCurp.getText());
+
+            personaConsulta.registroPersona(personaAgregar);
+
+            JOptionPane.showMessageDialog(this, "Persona agregada con exito", "confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            campoRFC.setText("");
+            campoApellidoM.setText("");
+            campoApellidoP.setText("");
+            campoCurp.setText("");
+            campoNombre.setText("");
+            campoTelefono.setText("");
+            date.setDate(null);
+
         }
-         
+
         control.desplegarMenu();
         dispose();
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
     private void BotonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistro1ActionPerformed
         // Verifica si los campos están vacíos
-    if(campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() ||
-       campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null ||
-       campoCurp.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
-    } else {
-        // Guarda el nombre del solicitante en una variable
-        String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
-        
-        // Crear el DTO para guardar los datos
-        PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), 
-                                                      campoApellidoP.getText(), campoTelefono.getText(), date.getDate(), 
-                                                      campoCurp.getText());
-        
-        // Realiza el registro de la persona
-        personaConsulta.registroPersona(personaAgregar);
-        
-        // Mostrar mensaje de confirmación
-        JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Pasar a la pantalla de DlgLicencia
-        //control.desplegarDlgLicencia(nombreSolicitante); // Pasa el nombre del solicitante como parámetro
-        
-        // Cierra esta ventana
-        dispose();
-    }
+        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty()
+                || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null
+                || campoCurp.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
+
+            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
+                    campoApellidoP.getText(), campoTelefono.getText(), date.getDate(),
+                    campoCurp.getText());
+
+            personaConsulta.registroPersona(personaAgregar);
+
+            JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            control.desplegarDlgLicencia(nombreSolicitante);
+
+            
+            dispose();
+        }
     }//GEN-LAST:event_BotonRegistro1ActionPerformed
 
     private void BotonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLimpiarActionPerformed

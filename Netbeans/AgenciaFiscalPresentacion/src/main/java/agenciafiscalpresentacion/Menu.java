@@ -57,11 +57,6 @@ public class Menu extends javax.swing.JFrame {
         BotonLicencias.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         BotonLicencias.setForeground(new java.awt.Color(255, 255, 255));
         BotonLicencias.setText("LICENCIAS");
-        BotonLicencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonLicenciasActionPerformed(evt);
-            }
-        });
 
         BotonPlacas.setBackground(new java.awt.Color(51, 102, 0));
         BotonPlacas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -156,13 +151,6 @@ public class Menu extends javax.swing.JFrame {
         control.desplegarRegistro();
         dispose();
     }//GEN-LAST:event_BotonRegistroActionPerformed
-
-    private void BotonLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLicenciasActionPerformed
-        // TODO add your handling code here:
-        DlgLicencia l=new DlgLicencia();
-        l.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_BotonLicenciasActionPerformed
 
     /**
      * @param args the command line arguments
