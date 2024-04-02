@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daos;
 
 import entidades.Persona;
@@ -9,13 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
 /**
  *
  * @author delll
  */
-public class PersonasDAO implements IPersonaDAO{
-private EntityManagerFactory emf;
+public class PersonasDAO implements IPersonaDAO {
+
+    private EntityManagerFactory emf;
 
     public PersonasDAO() {
         emf = Persistence.createEntityManagerFactory("ConexionPU");
@@ -23,16 +19,21 @@ private EntityManagerFactory emf;
 
     @Override
     public void RegistrarPersona(Persona persona) {
-        System.out.println("llego");
+
+        //System.out.println("llego");        
         EntityManager em = emf.createEntityManager();
-        
+        try {
             em.getTransaction().begin();
             em.persist(persona);
             persona.toString();
-            em.getTransaction().commit();
             System.out.println("enviado a la bd");
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.getMessage();
 
-        
+        } finally {
+            em.close();
+
+        }
     }
-    
 }

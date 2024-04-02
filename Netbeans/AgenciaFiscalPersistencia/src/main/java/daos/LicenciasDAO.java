@@ -7,10 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -25,47 +21,40 @@ public class LicenciasDAO implements ILicenciasDAO {
     @Override
     public void RegistrarLicencia(Licencia licencia) {
          EntityManager em = emf.createEntityManager();
-        
-            em.getTransaction().begin();
-            if(BuscarPersonaPoRFC(licencia.getRFC())!=null){
-                em.persist(licencia);
+    try {
+        em.getTransaction().begin();
+        // Verifica si la persona asociada a la licencia existe en la base de datos
+        Persona persona = BuscarPersonaPoRFC(licencia.getRFC());
+        if (persona != null) {
+            // Asigna la persona encontrada a la licencia
+            licencia.setPersona(persona);
+            // Persiste la licencia en la base de datos
+            System.out.println("DATOS EN LA BASE DE DATOS");
+            em.persist(licencia);
             em.getTransaction().commit();
-            }
-            
-           
+        } else {
+            // Si la persona no existe, lanza una excepción o muestra un mensaje de error
+            // Aquí te dejo un ejemplo de cómo lanzar una excepción:
+            throw new IllegalArgumentException("La persona con RFC " + licencia.getRFC() + " no existe en la base de datos.");
+        }
+    } finally {
+        em.close();
+    }
     }
 
+    //Capa persistencia persona
     @Override
     public Persona BuscarPersonaPoRFC(String rfc) {
-         EntityManager em = emf.createEntityManager();
-            TypedQuery<Persona> query = em.createQuery(
-            "SELECT p FROM Persona p WHERE p.rfc = :rfc", Persona.class);
-        query.setParameter("rfc", rfc);
-
-        // Ejecutar la consulta y obtener los resultados
-        List<Persona> personas = query.getResultList();
-
-        // Verificar si se encontró al menos una persona
-        if (!personas.isEmpty()) {
-            return personas.get(0); // Devolver la primera persona encontrada
-        } else {
-            System.out.println("No se encontró ninguna persona con ese RFC.");
-            return null;
-        } 
-//        TypedQuery<Persona> query = em.createQuery(
-//            "SELECT p FROM Persona p WHERE p.rfc = :rfc", Persona.class);
-//        query.setParameter("rfc", rfc);
-//
-//        try {
-//            return query.getSingleResult();
-//        } catch (javax.persistence.NoResultException e) {
-//            System.out.println("No se encontró ninguna persona con ese RFC.");
-//        } catch (javax.persistence.NonUniqueResultException e) {
-//            System.out.println("Se encontraron múltiples personas con el mismo RFC.");
-//        }
-//
-//        return null;
+           EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT p FROM Persona p WHERE p.rfc = :rfc");
+            query.setParameter("rfc", rfc);
+             List<Persona> resultList = query.getResultList();
+            return resultList.isEmpty() ? null : resultList.get(0);
+        } finally {
+            em.close();
+        }
+  
     }
-
     
 }
