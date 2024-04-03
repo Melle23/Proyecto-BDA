@@ -128,4 +128,13 @@ public class Automovil implements Serializable {
         this.placas = placas;
     }
 
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
+
 }

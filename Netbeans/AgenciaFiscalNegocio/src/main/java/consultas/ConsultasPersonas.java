@@ -18,7 +18,7 @@ IPersonaDAO persona;
 
     @Override
     public void registroPersona(PersonasDTO p) {
-        Persona nuevaPersona=new Persona(p.getNombre(), p.getApellidoP(), p.getApellidoM(), p.getTelefono(), p.getRFC(), p.getFechaNacimiento(),p.getCurp());
+        Persona nuevaPersona=new Persona(p.getRFC(), p.getNombre(), p.getApellidoP(), p.getApellidoM(), p.getTelefono(), p.getFechaNacimiento(), p.getCurp());
         System.out.println("consultaPersonas");
         persona.RegistrarPersona(nuevaPersona);
     }

@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
  * @author molin
  */
 public class DlgRegistro extends javax.swing.JDialog {
-
-    ControlPresentacion control = new ControlPresentacion();
+//
+   ControlPresentacion control = new ControlPresentacion();
     IConsultasPersonas personaConsulta;
 
     /**
@@ -96,6 +96,12 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel5.setText("Telefono:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 24));
+
+        campoRFC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoRFCActionPerformed(evt);
+            }
+        });
         jPanel2.add(campoRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 219, -1));
         jPanel2.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 219, -1));
         jPanel2.add(campoApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 219, -1));
@@ -204,16 +210,14 @@ public class DlgRegistro extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
 
-            String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
+            //String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
 
-            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
-                    campoApellidoP.getText(), campoTelefono.getText(), date.getDate(),
-                    campoCurp.getText());
+            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(),campoTelefono.getText(),date.getDate(), campoCurp.getText());
 
             personaConsulta.registroPersona(personaAgregar);
 
             JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-            control.desplegarDlgLicencia(nombreSolicitante);
+            control.desplegarDlgLicencia();
 
             
             dispose();
@@ -236,6 +240,10 @@ public class DlgRegistro extends javax.swing.JDialog {
         control.desplegarMenu();
         dispose();
     }//GEN-LAST:event_BotonRegreso1ActionPerformed
+
+    private void campoRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoRFCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoRFCActionPerformed
 
     /**
      * @param args the command line arguments

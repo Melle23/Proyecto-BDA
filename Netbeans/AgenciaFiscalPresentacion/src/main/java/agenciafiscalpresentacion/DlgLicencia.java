@@ -3,14 +3,11 @@ package agenciafiscalpresentacion;
 import Control.ControlPresentacion;
 import consultas.ConsultasLicencias;
 import consultas.IConsultasLicencias;
-import daos.LicenciasDAO;
-import daos.PersonasDAO;
 import dtos.LicenciaDTO;
-//import entidades.AgenciaFiscalPersistencia;
-//import entidades.EnumTipoLicencia;
-//import entidades.EnumVigenciaLicencia;
-import entidades.Licencia;
-import entidades.Persona;
+import java.time.LocalDate;
+
+
+
 import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -23,7 +20,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
     IConsultasLicencias personaConsulta;
-    //EnumTipoLicencia licencia;
+    
     private JComboBox<String> comboBox;
 
     /**
@@ -39,7 +36,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     public DlgLicencia() {
         initComponents();
-//        this.personaConsulta=new ConsultasLicencias();
+        this.personaConsulta=new ConsultasLicencias();
         this.setVisible(true);
     }
 
@@ -309,53 +306,87 @@ public class DlgLicencia extends javax.swing.JDialog {
     }//GEN-LAST:event_BotonRegresoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String importeTexto = txtImporte.getText();
+        //String importeTexto = txtImporte.getText();
         if (comboBoxTipo.getItemCount() == 0 || comboBoxVigencia.getItemCount() == 0) {
             JOptionPane.showMessageDialog(this, "Por favor elija una opción", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
-//            String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
-//            EnumTipoLicencia tipo;
-//            switch (tipoSeleccionado) {
-//                case "Si":
-//                    tipo = EnumTipoLicencia.DISCAPACITADOS;
-//                    break;
-//                case "No":
-//                    tipo = EnumTipoLicencia.NORMAL;
-//                    break;
-//                default:
-//                    JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
-//                    return;
-//            }
-//            String vigenciaSeleccionada = comboBoxVigencia.getSelectedItem().toString();
-//            EnumVigenciaLicencia vigencia;
-//            switch (vigenciaSeleccionada) {
-//                case "1":
-//                    vigencia = EnumVigenciaLicencia.UNO;
-//                    break;
-//                case "2":
-//                    vigencia = EnumVigenciaLicencia.DOS;
-//                    break;
-//                case "3":
-//                    vigencia = EnumVigenciaLicencia.TRES;
-//                    break;
-//                default:
-//                    JOptionPane.showMessageDialog(this, "Vigencia no válida", "Error", JOptionPane.ERROR_MESSAGE);
-//                    return;
-//            }
-//            Float importe = Float.valueOf(importeTexto);
+            String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
+           String tipo;
+            switch (tipoSeleccionado) {
+                case "Si":
+                    tipo = "discapacitados";
+                    break;
+                case "No":
+                    tipo = "normal";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+            }
+            String vigenciaSeleccionada = comboBoxVigencia.getSelectedItem().toString();
+          LicenciaDTO licencias = new LicenciaDTO(txtRFC.getText(), tipo, vigenciaSeleccionada, calcularCosto(), LocalDate.now()) ;
 
-            LicenciasDAO licenciasDAO = new LicenciasDAO();
-            Persona persona = licenciasDAO.BuscarPersonaPoRFC(txtRFC.getText());
+           personaConsulta.registroLicencia(licencias);
+           JOptionPane.showMessageDialog(this, "Licencia agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+//          
 
-         //  Licencia licencias = new Licencia(persona, "normal", "uno", fechaVencimiento.getDate(), 0f);
+         
 
-//            licenciasDAO.RegistrarLicencia(licencias);
-            JOptionPane.showMessageDialog(this, "Licencia agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+          
 
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
+public Float calcularCosto() {
+       String vigencia = comboBoxVigencia.getSelectedItem().toString();
+       String tipo=cambiarTipo();
+       Float costo;
+     int anosVigencia;
+        //int añosVigencia = fechaExpedicion.until(fechaActual).getYears();
+        if(vigencia.equalsIgnoreCase("1")){
+             anosVigencia=1;
+        } else if (vigencia.equalsIgnoreCase("2")){
+            anosVigencia=2;
+        }else{
+            anosVigencia=3;
+        }
+        
 
+        if (tipo.equals("normal")) {
+            switch (anosVigencia) {
+                case 1:
+                    
+                     costo = 600f;
+                    break;
+                case 2:
+                    costo = 900f;
+                    break;
+                case 3:
+                    costo = 1100f;
+                    break;
+                default:
+                    throw new IllegalStateException("Vigencia de licencia no válida: " + anosVigencia);
+            }
+        } else if (tipo.equals("discapacitados")) {
+            switch (anosVigencia) {
+                case 1:
+                  costo = 200f;
+                    
+                    break;
+                case 2:
+                    costo = 500f;
+                    break;
+                case 3:
+                   costo = 700f;
+                    break;
+                default:
+                    throw new IllegalStateException("Vigencia de licencia no válida: " + anosVigencia);
+            }
+        } else {
+            throw new IllegalArgumentException("Tipo de licencia no válido: " + tipo);
+        }
+       return costo; 
+    }
     private void txtSolicitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSolicitanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSolicitanteActionPerformed
@@ -372,7 +403,22 @@ public class DlgLicencia extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_BotonLimpiarActionPerformed
-
+    private String cambiarTipo(){
+        String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
+        String tipo;
+            switch (tipoSeleccionado) {
+                case "Si":
+                    tipo = "discapacitados";
+                    break;
+                case "No":
+                    tipo = "normal";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
+                    return tipo=null;
+            }
+            return tipo;
+    }
     private void comboBoxVigenciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboBoxVigenciaKeyReleased
         // TODO add your handling code here:
 

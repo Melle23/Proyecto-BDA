@@ -49,13 +49,15 @@ public class Persona implements Serializable {
     private String curp;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
-    private List<Licencia> licencias = new ArrayList<>();
+    private List<Licencia> licencias ;
 
 
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
-    private List<Automovil> automoviles = new ArrayList<>();
+    private List<Automovil> automoviles;
     
     public Persona() {
+        automoviles = new ArrayList<>();
+        licencias = new ArrayList<>();
     }
 
     public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaNacimiento, String curp) {

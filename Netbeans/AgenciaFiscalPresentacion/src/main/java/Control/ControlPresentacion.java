@@ -26,15 +26,14 @@ public class ControlPresentacion {
         DlgPlacas desplegarPlacas = new DlgPlacas();
     }
 
-    public void desplegarDlgLicencia(String nombreSolicitante) {
-        DlgLicencia dlgLicencia = new DlgLicencia(null, true);
+    public void desplegarDlgLicencia() {
+        DlgLicencia dlgLicencia = new DlgLicencia();
 
-        dlgLicencia.mostrarNombreSolicitante(nombreSolicitante); // Configura el nombre del solicitante en la siguiente ventana
+         // Configura el nombre del solicitante en la siguiente ventana
         dlgLicencia.setVisible(true);
 
     }
     
     
-    public void personaPorRFC(){
-    }
+   
 }
