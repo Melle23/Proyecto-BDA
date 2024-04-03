@@ -118,7 +118,7 @@ public class DlgRegistro extends javax.swing.JDialog {
                 BotonRegistroActionPerformed(evt);
             }
         });
-        jPanel2.add(BotonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 260, 40));
+        jPanel2.add(BotonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 260, 40));
 
         BotonRegistro1.setBackground(new java.awt.Color(51, 153, 0));
         BotonRegistro1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -129,7 +129,7 @@ public class DlgRegistro extends javax.swing.JDialog {
                 BotonRegistro1ActionPerformed(evt);
             }
         });
-        jPanel2.add(BotonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, 42));
+        jPanel2.add(BotonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, 42));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("CURP:");
@@ -208,6 +208,7 @@ public class DlgRegistro extends javax.swing.JDialog {
         } else {
 
             String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
+            String rfc = campoRFC.getText();
 
             PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
                     campoApellidoP.getText(), campoTelefono.getText(), date.getDate(),
@@ -216,10 +217,10 @@ public class DlgRegistro extends javax.swing.JDialog {
             personaConsulta.registroPersona(personaAgregar);
 
             JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-            control.desplegarDlgLicencia(nombreSolicitante);
-
-            
+            control.desplegarDlgLicencia(nombreSolicitante, rfc);
             dispose();
+            
+            
         }
     }//GEN-LAST:event_BotonRegistro1ActionPerformed
 

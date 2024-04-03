@@ -1,6 +1,7 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(230, 243, 230));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -57,11 +58,21 @@ public class Menu extends javax.swing.JFrame {
         BotonLicencias.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         BotonLicencias.setForeground(new java.awt.Color(255, 255, 255));
         BotonLicencias.setText("LICENCIAS");
+        BotonLicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonLicenciasActionPerformed(evt);
+            }
+        });
 
         BotonPlacas.setBackground(new java.awt.Color(51, 102, 0));
         BotonPlacas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         BotonPlacas.setForeground(new java.awt.Color(255, 255, 255));
         BotonPlacas.setText("PLACAS");
+        BotonPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonPlacasActionPerformed(evt);
+            }
+        });
 
         BotonConsultas.setBackground(new java.awt.Color(51, 102, 0));
         BotonConsultas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -144,6 +155,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
@@ -151,6 +163,31 @@ public class Menu extends javax.swing.JFrame {
         control.desplegarRegistro();
         dispose();
     }//GEN-LAST:event_BotonRegistroActionPerformed
+
+    private void BotonPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonPlacasActionPerformed
+
+        String[] botones = {"Renovar Placas", "Registrar Placas"};
+
+        int variable = JOptionPane.showOptionDialog(null, "Tramite", "Placas", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null/*icono*/, botones, botones[0]);
+
+        if(variable == 0){
+            control.desplegarDlgPlacasUsadas();
+            dispose();
+        }else{
+            control.desplegarDlgPlacasNuevas();
+            dispose();
+        }
+                
+        System.out.println(variable);
+
+    }//GEN-LAST:event_BotonPlacasActionPerformed
+
+    private void BotonLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLicenciasActionPerformed
+        // TODO add your handling code here:
+        control.desplegarDlgLicencia();
+        dispose();
+
+    }//GEN-LAST:event_BotonLicenciasActionPerformed
 
     /**
      * @param args the command line arguments

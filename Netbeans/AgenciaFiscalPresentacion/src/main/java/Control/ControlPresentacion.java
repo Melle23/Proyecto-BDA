@@ -1,7 +1,8 @@
 package Control;
 
 import agenciafiscalpresentacion.DlgLicencia;
-import agenciafiscalpresentacion.DlgPlacas;
+import agenciafiscalpresentacion.DlgPlacasNuevas;
+import agenciafiscalpresentacion.DlgPlacasUsadas;
 import agenciafiscalpresentacion.DlgRegistro;
 import agenciafiscalpresentacion.Menu;
 
@@ -13,7 +14,7 @@ public class ControlPresentacion {
 
     public ControlPresentacion() {
     }
-    
+
     public void desplegarMenu() {
         Menu desplegarMenu = new Menu();
     }
@@ -22,19 +23,26 @@ public class ControlPresentacion {
         DlgRegistro desplegarRegistro = new DlgRegistro();
     }
 
-    public void desplegarDlgPlacas() {
-        DlgPlacas desplegarPlacas = new DlgPlacas();
-    }
-
-    public void desplegarDlgLicencia(String nombreSolicitante) {
+    public void desplegarDlgLicencia(String nombreSolicitante, String rfc) {
         DlgLicencia dlgLicencia = new DlgLicencia(null, true);
 
-        dlgLicencia.mostrarNombreSolicitante(nombreSolicitante); // Configura el nombre del solicitante en la siguiente ventana
+        dlgLicencia.mostrarNombreSolicitante(nombreSolicitante);
+        dlgLicencia.mostrarRFC(rfc);
         dlgLicencia.setVisible(true);
 
     }
-    
-    
-    public void personaPorRFC(){
+
+    public void desplegarDlgLicencia() {
+        DlgLicencia dlgLicencia = new DlgLicencia();
     }
+
+    public void desplegarDlgPlacasNuevas() {
+        DlgPlacasNuevas dlgPlacasNuevas = new DlgPlacasNuevas();
+    }
+
+    public void desplegarDlgPlacasUsadas() {
+        DlgPlacasUsadas dlgPlacasUsadas = new DlgPlacasUsadas();
+
+    }
+
 }
