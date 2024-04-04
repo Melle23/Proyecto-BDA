@@ -24,7 +24,7 @@ public class ControlPresentacion {
     }
 
     public void desplegarDlgLicencia(String nombreSolicitante, String rfc) {
-        DlgLicencia dlgLicencia = new DlgLicencia(null, true);
+        DlgLicencia dlgLicencia = new DlgLicencia();
 
         dlgLicencia.mostrarNombreSolicitante(nombreSolicitante);
         dlgLicencia.mostrarRFC(rfc);

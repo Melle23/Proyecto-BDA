@@ -45,15 +45,11 @@ public class LicenciasDAO implements ILicenciasDAO {
     //Capa persistencia persona
     @Override
     public Persona BuscarPersonaPoRFC(String rfc) {
-           EntityManager em = emf.createEntityManager();
-        try {
-            Query query = em.createQuery("SELECT p FROM Persona p WHERE p.rfc = :rfc");
-            query.setParameter("rfc", rfc);
-             List<Persona> resultList = query.getResultList();
-            return resultList.isEmpty() ? null : resultList.get(0);
-        } finally {
-            em.close();
-        }
+         EntityManager em = emf.createEntityManager();
+               return em.createQuery("SELECT p FROM Persona p WHERE p.rfc = :rfc", Persona.class)
+                            .setParameter("rfc", rfc)
+                            .getSingleResult();
+
   
     }
     

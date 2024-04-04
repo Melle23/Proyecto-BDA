@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,15 +29,16 @@ public class Placa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "PlacasUsado")
-    private String numeroPlacasAnt;
-    @Column(name = "numero")
-    private String numero;
+    @Column(name = "NumPlacas")
+    private String numeroPlacas;
+    
 
     @Column(name = "fecha_emision")
+    @Temporal(TemporalType.DATE)
     private Date fechaEmision;
 
     @Column(name = "fecha_recepcion")
+    @Temporal(TemporalType.DATE)
     private Date fechaRecepcion;
 
     @Column(name = "costo")
@@ -49,18 +52,19 @@ public class Placa implements Serializable {
     public Placa() {
     }
 
-    public Placa(String numeroPlacasAnt, String numero, Date fechaEmision, Date fechaRecepcion, Float costo, Automovil automovil) {
-        this.numeroPlacasAnt = numeroPlacasAnt;
-        this.numero = numero;
+    public Placa(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, Automovil automovil) {
+        this.numeroPlacas = numeroPlacas;
         this.fechaEmision = fechaEmision;
         this.fechaRecepcion = fechaRecepcion;
         this.costo = costo;
         this.automovil = automovil;
     }
+
+
     
 
     public void calcularCosto() {
-        if (this.numeroPlacasAnt == null) {
+        if (this.numeroPlacas == null) {
             // Si no hay número de placas anteriores, es un automóvil nuevo
             this.costo = 1500f;
         } else {
@@ -78,20 +82,14 @@ public class Placa implements Serializable {
     }
 
     public String getNumeroPlacasAnt() {
-        return numeroPlacasAnt;
+        return numeroPlacas;
     }
 
     public void setNumeroPlacasAnt(String numeroPlacasAnt) {
-        this.numeroPlacasAnt = numeroPlacasAnt;
+        this.numeroPlacas = numeroPlacasAnt;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+ 
 
     public Date getFechaEmision() {
         return fechaEmision;
@@ -127,7 +125,7 @@ public class Placa implements Serializable {
 
     @Override
     public String toString() {
-        return "Placa{" + "id=" + id + ", numeroPlacasAnt=" + numeroPlacasAnt + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", fechaRecepcion=" + fechaRecepcion + ", costo=" + costo + ", automovil=" + automovil + '}';
+        return "Placa{" + "id=" + id + ", numeroPlacasAnt=" + numeroPlacas  + ", fechaEmision=" + fechaEmision + ", fechaRecepcion=" + fechaRecepcion + ", costo=" + costo + ", automovil=" + automovil + '}';
     }
     
 }
