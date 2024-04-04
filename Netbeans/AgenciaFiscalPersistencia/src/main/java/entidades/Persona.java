@@ -1,5 +1,6 @@
 package entidades;
 
+import static Encriptacion.EncriptacionDatos.decriptar;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +37,7 @@ public class Persona implements Serializable {
     @Column(name = "apellidoM", nullable = false, length = 255)
     private String apellidoM;
 
-    @Column(name = "telefono", nullable = false, length = 16)
+    @Column(name = "telefono", nullable = false, length = 255)
     private String telefono;
 
     @Column(name = "rfc", nullable = false, length = 13)
@@ -137,7 +138,6 @@ public class Persona implements Serializable {
     public void setCurp(String curp) {
         this.curp = curp;
     }
-
     public List<Licencia> getLicencias() {
         return licencias;
     }
@@ -154,7 +154,9 @@ public class Persona implements Serializable {
         this.automoviles = automoviles;
     }
 
-    
+    public String getEncriptado(){
+        return decriptar(telefono);
+    }    
     @Override
     public String toString() {
         return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", rfc=" + rfc + ", fechaNacimiento=" + fechaNacimiento + ", curp=" + curp + '}';

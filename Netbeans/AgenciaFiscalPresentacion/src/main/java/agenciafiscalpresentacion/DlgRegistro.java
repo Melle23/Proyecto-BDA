@@ -1,12 +1,10 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import Encriptacion.EncriptacionDatos;
 import consultas.ConsultasPersonas;
 import consultas.IConsultasPersonas;
-import daos.IPersonaDAO;
-import daos.PersonasDAO;
 import dtos.PersonasDTO;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -68,6 +66,7 @@ public class DlgRegistro extends javax.swing.JDialog {
         BotonRegreso1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("REGISTRO");
 
         jPanel1.setBackground(new java.awt.Color(235, 250, 239));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,14 +176,17 @@ public class DlgRegistro extends javax.swing.JDialog {
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
         // TODO add your handling code here:
         if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null || campoCurp.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor,complete todos los espcios", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los espacios", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
-            //guardando en un DTO
-            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), campoTelefono.getText(), date.getDate(), campoCurp.getText());
+            // Encriptar el teléfono antes de agregar la persona
+            String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
+
+            // Guardando en un DTO
+            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), telefonoEncriptado, date.getDate(), campoCurp.getText());
 
             personaConsulta.registroPersona(personaAgregar);
 
-            JOptionPane.showMessageDialog(this, "Persona agregada con exito", "confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             campoRFC.setText("");
             campoApellidoM.setText("");
             campoApellidoP.setText("");
@@ -192,7 +194,6 @@ public class DlgRegistro extends javax.swing.JDialog {
             campoNombre.setText("");
             campoTelefono.setText("");
             date.setDate(null);
-
         }
 
         control.desplegarMenu();
@@ -206,12 +207,13 @@ public class DlgRegistro extends javax.swing.JDialog {
                 || campoCurp.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
-
             String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
             String rfc = campoRFC.getText();
 
+            // Encriptar el teléfono antes de agregar la persona
+            String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
             PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
-                    campoApellidoP.getText(), campoTelefono.getText(), date.getDate(),
+                    campoApellidoP.getText(), telefonoEncriptado, date.getDate(),
                     campoCurp.getText());
 
             personaConsulta.registroPersona(personaAgregar);
@@ -219,8 +221,6 @@ public class DlgRegistro extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             control.desplegarDlgLicencia(nombreSolicitante, rfc);
             dispose();
-            
-            
         }
     }//GEN-LAST:event_BotonRegistro1ActionPerformed
 
