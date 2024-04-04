@@ -28,13 +28,10 @@ public class LicenciasDAO implements ILicenciasDAO {
         if (persona != null) {
             // Asigna la persona encontrada a la licencia
             licencia.setPersona(persona);
-            // Persiste la licencia en la base de datos
             System.out.println("DATOS EN LA BASE DE DATOS");
             em.persist(licencia);
             em.getTransaction().commit();
-        } else {
-            // Si la persona no existe, lanza una excepción o muestra un mensaje de error
-            // Aquí te dejo un ejemplo de cómo lanzar una excepción:
+        } else {           
             throw new IllegalArgumentException("La persona con RFC " + licencia.getRFC() + " no existe en la base de datos.");
         }
     } finally {
