@@ -4,6 +4,7 @@ import agenciafiscalpresentacion.DlgLicencia;
 import agenciafiscalpresentacion.DlgPlacasNuevas;
 import agenciafiscalpresentacion.DlgPlacasUsadas;
 import agenciafiscalpresentacion.DlgRegistro;
+import agenciafiscalpresentacion.DlgReporte;
 import agenciafiscalpresentacion.Menu;
 
 /**
@@ -45,4 +46,7 @@ public class ControlPresentacion {
 
     }
 
+    public void desplegarDlgReporte(){
+        DlgReporte dlgReporte = new DlgReporte();
+    }
 }
