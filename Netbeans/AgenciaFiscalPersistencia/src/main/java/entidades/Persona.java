@@ -24,9 +24,13 @@ import javax.persistence.TemporalType;
 @Table(name = "personas")
 public class Persona implements Serializable {
 
+    
+     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "rfc", nullable = false, length = 13)
+    private String rfc;
 
     @Column(name = "nombre", nullable = false, length = 255)
     private String nombre;
@@ -40,8 +44,7 @@ public class Persona implements Serializable {
     @Column(name = "telefono", nullable = false, length = 255)
     private String telefono;
 
-    @Column(name = "rfc", nullable = false, length = 13)
-    private String rfc;
+    
 
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
@@ -73,8 +76,6 @@ public class Persona implements Serializable {
         this.curp = curp;
     }
 
-    
-
     public Long getId() {
         return id;
     }
@@ -82,6 +83,9 @@ public class Persona implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    
+
 
     public String getNombre() {
         return nombre;
@@ -159,7 +163,7 @@ public class Persona implements Serializable {
     }    
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", rfc=" + rfc + ", fechaNacimiento=" + fechaNacimiento + ", curp=" + curp + '}';
+        return "Persona{" + "rcf=" + rfc + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", curp=" + curp + '}';
     }
 
     

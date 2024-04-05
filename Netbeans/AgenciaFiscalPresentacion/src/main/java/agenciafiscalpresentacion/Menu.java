@@ -78,6 +78,11 @@ public class Menu extends javax.swing.JFrame {
         BotonConsultas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         BotonConsultas.setForeground(new java.awt.Color(255, 255, 255));
         BotonConsultas.setText("CONSULTA");
+        BotonConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConsultasActionPerformed(evt);
+            }
+        });
 
         BotonReportes.setBackground(new java.awt.Color(51, 102, 0));
         BotonReportes.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -193,6 +198,12 @@ public class Menu extends javax.swing.JFrame {
         control.desplegarDlgReporte();
         dispose();
     }//GEN-LAST:event_BotonReportesActionPerformed
+
+    private void BotonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultasActionPerformed
+        // TODO add your handling code here:
+        control.desplegarDlgConsultas();
+        dispose();
+    }//GEN-LAST:event_BotonConsultasActionPerformed
 
     /**
      * @param args the command line arguments

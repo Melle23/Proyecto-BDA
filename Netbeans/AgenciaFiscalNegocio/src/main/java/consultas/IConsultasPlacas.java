@@ -4,7 +4,10 @@
  */
 package consultas;
 
+
+import dtos.LicenciaDTO;
 import dtos.PlacasDTO;
+import java.util.List;
 
 /**
  *
@@ -14,6 +17,9 @@ public interface IConsultasPlacas {
     public void AgregarPlacasNuevas(PlacasDTO p);
     public void AgregarPlacasUsadas(PlacasDTO p);
     public void BuscarPlacas(String p);
+    public List<PlacasDTO> listaPlacas(String rfc);
     
     
+        
+       
 }

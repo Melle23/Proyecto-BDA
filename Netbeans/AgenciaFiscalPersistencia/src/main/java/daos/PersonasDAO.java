@@ -2,9 +2,11 @@ package daos;
 
 import Encriptacion.EncriptacionDatos;
 import entidades.Persona;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -41,4 +43,16 @@ public class PersonasDAO implements IPersonaDAO {
 
         }
     }
+
+    @Override
+    public List<Persona> obtenerPersonas() {
+         EntityManager em = emf.createEntityManager();
+        
+        String jpql = "SELECT p FROM Persona p"; // JPQL para seleccionar todas las personas
+        Query query = em.createQuery(jpql);
+        return query.getResultList();
+       
+
+    }
+    
 }

@@ -46,8 +46,7 @@ public class Automovil implements Serializable {
     private String modelo;
 
     @ManyToOne
-    //@JoinColumn(name = "persona_rfc")
-    @JoinColumn(name = "persona_id")
+    @JoinColumn(name = "persona_rfc")
     private Persona persona;
 
     @OneToMany(mappedBy = "automovil", cascade = CascadeType.PERSIST)

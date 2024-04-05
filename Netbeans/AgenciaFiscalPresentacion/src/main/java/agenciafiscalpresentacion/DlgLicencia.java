@@ -1,18 +1,14 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
-import consultas.ConsultasLicencias;
 import consultas.IConsultasLicencias;
 import daos.LicenciasDAO;
-import daos.PersonasDAO;
-import dtos.LicenciaDTO;
-import entidades.AgenciaFiscalPersistencia;
+
 import entidades.EnumTipoLicencia;
 import entidades.EnumVigenciaLicencia;
 import entidades.Licencia;
 import entidades.Persona;
-import java.util.Date;
-import javax.swing.JButton;
+
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 

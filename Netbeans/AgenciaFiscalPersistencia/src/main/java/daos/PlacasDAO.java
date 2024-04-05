@@ -5,6 +5,7 @@
 package daos;
 
 import entidades.Automovil;
+import entidades.Licencia;
 import entidades.Placa;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -56,5 +57,18 @@ public class PlacasDAO implements IPlacasDAO  {
                             .setParameter("numeroSerie", p)
                             .getSingleResult();
 
+    }
+
+   
+
+    @Override
+    public List<Placa> obtenerPlacasPorRfc(String rfc) {
+         EntityManager em = emf.createEntityManager();
+         String jpql = "SELECT p FROM Placa p WHERE p.automovil.persona.rfc = :rfc";
+
+        Query query = em.createQuery(jpql);
+        query.setParameter("rfc", rfc);
+
+        return query.getResultList();
     }
 }   

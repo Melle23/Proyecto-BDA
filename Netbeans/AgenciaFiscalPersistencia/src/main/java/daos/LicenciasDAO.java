@@ -50,4 +50,13 @@ public class LicenciasDAO implements ILicenciasDAO {
   
     }
     
+     @Override
+    public List<Licencia> obtenerLicenciasPorRfc(String rfc) {
+        EntityManager em = emf.createEntityManager();
+            String jpql = "SELECT l FROM Licencia l WHERE l.persona.rfc = :rfc";
+        Query query = em.createQuery(jpql);
+        query.setParameter("rfc", rfc);
+
+        return query.getResultList();
+        }
 }
