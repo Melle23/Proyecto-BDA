@@ -66,18 +66,18 @@ public class ConsultasPlacas implements IConsultasPlacas {
     private List<PlacasDTO> convertirADTOsPlaca(List<Placa> placas) {
         List<PlacasDTO> pDTO = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+        String fechaFormateadaE="";
+        String fechaFormateadaR="";
         for (Placa p : placas) {
             PlacasDTO placaDTO = new PlacasDTO();
-            String fechaFormateadaE = sdf.format(p.getFechaEmision());
-            String fechaFormateadaR = sdf.format(p.getFechaRecepcion());
-            if(p.getFechaEmision()==null){
-                fechaFormateadaE="----";
-                placaD
-            }else if(p.getFechaRecepcion()==null){
-                fechaFormateadaR="-----";
+            if(p.getFechaEmision()!=null){
+             fechaFormateadaE = sdf.format(p.getFechaEmision());
             }
-
+            if(p.getFechaRecepcion()!=null){
+             fechaFormateadaR = sdf.format(p.getFechaRecepcion());
+            }
+         
+            
             placaDTO.setNumeroPlacas(p.getNumeroPlacasAnt());
             placaDTO.setFechaE(fechaFormateadaE);
             placaDTO.setFechaR(fechaFormateadaR);

@@ -178,7 +178,7 @@ public class DlgConsultas extends javax.swing.JFrame {
             }
             String rfc=datosFila[1].toString();
              control.desplegarDlgHistorial(rfc);
-        dispose();
+            this.dispose();
             
         }
        
