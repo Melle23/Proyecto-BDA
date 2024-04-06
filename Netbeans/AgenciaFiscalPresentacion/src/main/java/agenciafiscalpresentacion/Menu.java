@@ -29,133 +29,81 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         BotonRegistro = new javax.swing.JButton();
         BotonLicencias = new javax.swing.JButton();
         BotonPlacas = new javax.swing.JButton();
         BotonConsultas = new javax.swing.JButton();
         BotonReportes = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENÚ");
 
         jPanel1.setBackground(new java.awt.Color(230, 243, 230));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-
-        BotonRegistro.setBackground(new java.awt.Color(51, 102, 0));
-        BotonRegistro.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonRegistro.setForeground(new java.awt.Color(255, 255, 255));
-        BotonRegistro.setText("REGISTRO");
+        BotonRegistro.setOpaque(false);
+        BotonRegistro.setContentAreaFilled(false);
+        BotonRegistro.setBorderPainted(false);
         BotonRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonRegistroActionPerformed(evt);
             }
         });
+        jPanel1.add(BotonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 180, 50));
 
-        BotonLicencias.setBackground(new java.awt.Color(51, 102, 0));
-        BotonLicencias.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonLicencias.setForeground(new java.awt.Color(255, 255, 255));
-        BotonLicencias.setText("LICENCIAS");
+        BotonLicencias.setOpaque(false);
+        BotonLicencias.setContentAreaFilled(false);
+        BotonLicencias.setBorderPainted(false);
         BotonLicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonLicenciasActionPerformed(evt);
             }
         });
+        jPanel1.add(BotonLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 180, 50));
 
-        BotonPlacas.setBackground(new java.awt.Color(51, 102, 0));
-        BotonPlacas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonPlacas.setForeground(new java.awt.Color(255, 255, 255));
-        BotonPlacas.setText("PLACAS");
+        BotonPlacas.setOpaque(false);
+        BotonPlacas.setContentAreaFilled(false);
+        BotonPlacas.setBorderPainted(false);
         BotonPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonPlacasActionPerformed(evt);
             }
         });
+        jPanel1.add(BotonPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 180, 50));
 
-        BotonConsultas.setBackground(new java.awt.Color(51, 102, 0));
-        BotonConsultas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonConsultas.setForeground(new java.awt.Color(255, 255, 255));
-        BotonConsultas.setText("CONSULTA");
+        BotonConsultas.setOpaque(false);
+        BotonConsultas.setContentAreaFilled(false);
+        BotonConsultas.setBorderPainted(false);
         BotonConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonConsultasActionPerformed(evt);
             }
         });
+        jPanel1.add(BotonConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 180, 50));
 
-        BotonReportes.setBackground(new java.awt.Color(51, 102, 0));
-        BotonReportes.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonReportes.setForeground(new java.awt.Color(255, 255, 255));
-        BotonReportes.setText("REPORTES");
+        BotonReportes.setOpaque(false);
+        BotonReportes.setContentAreaFilled(false);
+        BotonReportes.setBorderPainted(false);
         BotonReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonReportesActionPerformed(evt);
             }
         });
+        jPanel1.add(BotonReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 180, 50));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BotonReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotonLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotonPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotonConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotonReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE)
-                .addGap(130, 130, 130))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(305, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\favel\\OneDrive\\Documentos\\NetBeansProjects\\Proyecto-BDA\\Netbeans\\AgenciaFiscalPresentacion\\src\\main\\java\\Imagenes\\Pantalla_Principal.png")); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 700, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
         );
 
         pack();
@@ -246,8 +194,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BotonPlacas;
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JButton BotonReportes;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
