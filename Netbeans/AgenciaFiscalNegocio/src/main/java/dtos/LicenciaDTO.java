@@ -15,14 +15,16 @@ public class LicenciaDTO {
     EnumVigenciaLicencia vigencia;
     Float costo;
     Date FechaExpedicion;
+    boolean activa;
     String Fv;
 
-    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaExpedicion) {
+    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaExpedicion,boolean activa) {
         this.RFC = RFC;
         this.tipo = tipo;
         this.vigencia = vigencia;
         this.costo = costo;
         this.FechaExpedicion = FechaExpedicion;
+        this.activa=activa;
     }
 
     public LicenciaDTO() {
@@ -84,6 +86,14 @@ public class LicenciaDTO {
 
     public void setFv(String Fv) {
         this.Fv = Fv;
+    }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
     }
     
     

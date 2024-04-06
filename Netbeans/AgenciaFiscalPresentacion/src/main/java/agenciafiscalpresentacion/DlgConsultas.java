@@ -129,21 +129,17 @@ public class DlgConsultas extends javax.swing.JFrame {
         jTabla.setFont(new java.awt.Font("Amazon Ember", 0, 12)); // NOI18N
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Rfc", "ApellidoPaterno", "ApellidoMaterno", "FechaNacimiento", "Curp", "Telefono"
+                "Nombre", "Rfc", "ApellidoPaterno", "ApellidoMaterno", "FechaNacimiento", "Curp", "Telefono", "Activa"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -252,7 +248,8 @@ public class DlgConsultas extends javax.swing.JFrame {
             p.getFecha(),
             p.getCurp(),
             p.getTelefono()
-        };
+            
+            };
         modeloTabla.addRow(fila);
     }
 

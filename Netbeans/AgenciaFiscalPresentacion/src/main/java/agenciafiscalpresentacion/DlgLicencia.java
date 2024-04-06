@@ -1,6 +1,7 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import consultas.ConsultasLicencias;
 import consultas.IConsultasLicencias;
 import daos.LicenciasDAO;
 
@@ -8,6 +9,9 @@ import entidades.EnumTipoLicencia;
 import entidades.EnumVigenciaLicencia;
 import entidades.Licencia;
 import entidades.Persona;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -36,7 +40,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     public DlgLicencia() {
         initComponents();
-//        this.personaConsulta=new ConsultasLicencias();
+        personaConsulta = new ConsultasLicencias();
         this.setVisible(true);
     }
 
@@ -62,8 +66,6 @@ public class DlgLicencia extends javax.swing.JDialog {
         btnGuardar = new javax.swing.JButton();
         botonRegreso = new javax.swing.JButton();
         comboBoxTipo = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        fechaVencimiento = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         txtRFC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -119,14 +121,6 @@ public class DlgLicencia extends javax.swing.JDialog {
                 comboBoxVigenciaActionPerformed(evt);
             }
         });
-        comboBoxVigencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                comboBoxVigenciaKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                comboBoxVigenciaKeyReleased(evt);
-            }
-        });
 
         btnGuardar.setBackground(new java.awt.Color(153, 255, 102));
         btnGuardar.setText("Guardar");
@@ -152,15 +146,12 @@ public class DlgLicencia extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Fecha de vencimiento :");
-
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("RFC:");
 
-        txtRFC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRFCActionPerformed(evt);
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
             }
         });
 
@@ -195,15 +186,8 @@ public class DlgLicencia extends javax.swing.JDialog {
                         .addGap(16, 16, 16))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(184, 184, 184))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(fechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(204, 204, 204))))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
@@ -243,11 +227,7 @@ public class DlgLicencia extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(4, 4, 4)
-                .addComponent(fechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -294,7 +274,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String importeTexto = txtImporte.getText();
-        if (comboBoxTipo.getItemCount()==0 || comboBoxVigencia.getItemCount()==0 || txtSolicitante.getText().isEmpty() || txtRFC.getText().isEmpty() || fechaVencimiento.getDate() == null) {
+        if (comboBoxTipo.getItemCount() == 1 || comboBoxVigencia.getItemCount() == 1 || txtSolicitante.getText().isEmpty() || txtRFC.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();
@@ -310,9 +290,9 @@ public class DlgLicencia extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Tipo de licencia no válido", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
             }
-            
+
             String vigenciaSeleccionada = comboBoxVigencia.getSelectedItem().toString();
-           
+
             EnumVigenciaLicencia vigencia;
             switch (vigenciaSeleccionada) {
                 case "1":
@@ -332,12 +312,34 @@ public class DlgLicencia extends javax.swing.JDialog {
 
             LicenciasDAO licenciasDAO = new LicenciasDAO();
             Persona persona = licenciasDAO.BuscarPersonaPoRFC(txtRFC.getText());
+            if (persona != null) {
+                //vreando una fecha actual para cambiarla adate y mandar a vencida si se decide cancelar la licencia
+                LocalDate fechaEmision = LocalDate.now();
+                Date fechaV = Date.from(fechaEmision.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Licencia licenciabusca = personaConsulta.obtenerEstadoLicencia(txtRFC.getText());
+                if (licenciabusca == null) {
+                    //se crea una nueva licencia en caso 
+                    Licencia licencias = new Licencia(txtRFC.getText(), persona, tipo, vigencia, calcularFechaVencimiento(), true);
+                    licenciasDAO.RegistrarLicencia(licencias);
+                    limpiar();
+                    JOptionPane.showMessageDialog(this, "Licencia agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas desactivar la licencia actual?", "Confirmar cancelacion", JOptionPane.YES_NO_OPTION);
+                    if (confirmacion == 0) {
+                        ///se actualiza el estado(activo verdadero falso) y la fecha de vencimiento a  dia de hoy
+                        licenciabusca.setActiva(false);
+                        licenciabusca.setFechaVencimiento(fechaV);
+                        personaConsulta.actualizarLicencia(licenciabusca.getId(), licenciabusca.getFechaVencimiento(), licenciabusca.isActiva());
+                        Licencia l = new Licencia(txtRFC.getText(), persona, tipo, vigencia, calcularFechaVencimiento(), true);
+                        licenciasDAO.RegistrarLicencia(l);
+                        JOptionPane.showMessageDialog(this, "Licencia actualizada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                        limpiar();
+                    }
+                }
 
-            Licencia licencias = new Licencia(txtRFC.getText(), persona, tipo, vigencia, fechaVencimiento.getDate());
-
-            licenciasDAO.RegistrarLicencia(licencias);
-            JOptionPane.showMessageDialog(this, "Licencia agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-
+            } else {
+                JOptionPane.showMessageDialog(this, "El RFC que ingreso no existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -345,16 +347,6 @@ public class DlgLicencia extends javax.swing.JDialog {
     private void txtSolicitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSolicitanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSolicitanteActionPerformed
-
-    private void comboBoxVigenciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboBoxVigenciaKeyReleased
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_comboBoxVigenciaKeyReleased
-
-    private void comboBoxVigenciaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboBoxVigenciaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxVigenciaKeyPressed
 
     private void comboBoxVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVigenciaActionPerformed
 //         TODO add your handling code here:
@@ -438,10 +430,31 @@ public class DlgLicencia extends javax.swing.JDialog {
         txtImporte.setText(String.valueOf(importe));
 
     }//GEN-LAST:event_comboBoxTipoActionPerformed
+    /**
+     * es para calcular con la fecha actual y la vigencia seleccionada devolver la fecha en que vencera la
+     * licencia
+     * @return fecha de vencimiento de la licencia segun lo elegido
+     */
+    private Date calcularFechaVencimiento() {
+        LocalDate fechaEmision = LocalDate.now();
+        Object selectedItem = comboBoxVigencia.getSelectedItem();
+        // Convertir el elemento seleccionado a Integer utilizando Integer.parseInt()
+        int anosSeleccionados = Integer.parseInt(selectedItem.toString());
 
-    private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
+        LocalDate fechaVencimiento = fechaEmision.plusYears(anosSeleccionados);
+
+        // Convertir LocalDate a Date
+        Date fechaV = Date.from(fechaVencimiento.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return fechaV;
+
+    }
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRFCActionPerformed
+        if (txtRFC.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
 
 //    public void calcularFecha(Date fecha){
 //     if(comboBoxVigencia.getSelectedItem().toString().equals("1")) 
@@ -452,10 +465,18 @@ public class DlgLicencia extends javax.swing.JDialog {
     public void mostrarNombreSolicitante(String nombreSolicitante) {
         txtSolicitante.setText(nombreSolicitante);
     }
-    
-    public void mostrarRFC(String rfc){
+
+    public void mostrarRFC(String rfc) {
         txtRFC.setText(rfc);
     }
+
+    public void limpiar() {
+        txtRFC.setText("");
+        txtImporte.setText("");
+        txtSolicitante.setText("");
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -503,14 +524,12 @@ public class DlgLicencia extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JComboBox<String> comboBoxVigencia;
-    private com.toedter.calendar.JDateChooser fechaVencimiento;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -519,5 +538,4 @@ public class DlgLicencia extends javax.swing.JDialog {
     private javax.swing.JTextField txtSolicitante;
     // End of variables declaration//GEN-END:variables
 
-    
 }

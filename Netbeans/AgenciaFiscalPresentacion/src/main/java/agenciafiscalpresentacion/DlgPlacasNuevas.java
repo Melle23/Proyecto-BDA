@@ -5,6 +5,7 @@ import consultas.ConsultasPlacas;
 import consultas.IConsultasPlacas;
 import dtos.AutomovilesDTO;
 import dtos.PlacasDTO;
+import entidades.Placa;
 import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class DlgPlacasNuevas extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
+    DlgPlacasUsadas pu;
     IConsultasPlacas placanueva;
 
     /**
@@ -66,9 +68,10 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PLACAS NUEVAS");
-        setPreferredSize(new java.awt.Dimension(698, 467));
+        setPreferredSize(new java.awt.Dimension(650, 525));
 
         jPanel1.setBackground(new java.awt.Color(235, 250, 239));
+        jPanel1.setPreferredSize(new java.awt.Dimension(626, 469));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -101,6 +104,12 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Numero de serie:");
+
+        txtNumSerie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumSerieKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Marca:");
@@ -161,14 +170,14 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
                                 .addComponent(txtRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
+                .addContainerGap(172, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(156, 156, 156))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(171, 171, 171))))
+                        .addGap(201, 201, 201))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +205,15 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtImportePlacas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtImportePlacas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 550, 370));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 540, 400));
 
         BotonRegreso.setBackground(new java.awt.Color(153, 255, 102));
         BotonRegreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -220,7 +229,7 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,13 +252,26 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
         if (txtColor.getText().isEmpty() || txtNumSerie.getText().isEmpty() || txtMarca.getText().isEmpty() || txtLinea.getText().isEmpty() || txtImportePlacas.getText().isEmpty() || txtRfc.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor,complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
+             AutomovilesDTO a=placanueva.BuscarPlacas(txtNumSerie.getText());
+            if(a!=null){
+               JOptionPane.showMessageDialog(this, "Este automovil ya existe ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea ir a agregar una placa nueva ?", "Pasar a placa usada", JOptionPane.YES_NO_OPTION);
+                    if (confirmacion == 0) {
+                        pu.rfcUsadas=txtNumSerie.getText();
+                        control.desplegarDlgPlacasUsadas();
+                        
+                    }else{
+                        txtNumSerie.setText("");
+                    }
+            }else{
             //cerando nuevo automovil
             AutomovilesDTO auto = new AutomovilesDTO(txtNumSerie.getText(), txtMarca.getText(), txtLinea.getText(), txtColor.getText(), txtMarca.getText(), txtRfc.getText());
             //creando nuevas placas
-            PlacasDTO p = new PlacasDTO(txtNumSerie.getText(), fechaEmision, null, importe, auto);
+            PlacasDTO p = new PlacasDTO(txtNumSerie.getText(), fechaEmision, null, importe, auto,true);
             placanueva.AgregarPlacasNuevas(p);
             JOptionPane.showMessageDialog(this, "Placas y automovil agregados con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             limpiar();
+            }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -259,6 +281,43 @@ public class DlgPlacasNuevas extends javax.swing.JDialog {
         dispose();
 
     }//GEN-LAST:event_BotonRegresoActionPerformed
+
+    private void txtNumSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSerieKeyTyped
+        // TODO add your handling code here:
+      char c = evt.getKeyChar();
+        String currentText = txtNumSerie.getText();
+                
+        // Permite borrar cualquier carácter
+        if (c == '\b') {
+            return;
+        }
+        
+        // Solo permite escribir letras y guión si hay menos de 3 letras
+        if (currentText.length() < 3 && Character.isLetter(c)) {
+            return;
+        }
+        
+        // Permitir guión solo si hay 3 letras y no hay guión aún
+        if (currentText.length() == 3 && c == '-' && !currentText.contains("-")) {
+            return;
+        }
+        
+        // Solo permite escribir dígitos si ya hay 4 caracteres (3 letras + 1 guión)
+        if (currentText.length() == 4 && Character.isDigit(c)) {
+            return;
+        }
+        
+        // Solo permite escribir 3 dígitos después del guión
+        if (currentText.length() > 4 && Character.isDigit(c)) {
+            String digits = currentText.substring(5);
+            if (digits.length() < 3) {
+                return;
+            }
+        }
+
+        evt.consume(); // Si no cumple ninguna de las condiciones, consume el evento
+    
+    }//GEN-LAST:event_txtNumSerieKeyTyped
     public void limpiar() {
         txtColor.setText("");
         txtImportePlacas.setText("");

@@ -30,7 +30,7 @@ public class Automovil implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "numero_serie")
+    @Column(name = "numero_serie",unique = true)
     private String numeroSerie;
 
     @Column(name = "marca")
