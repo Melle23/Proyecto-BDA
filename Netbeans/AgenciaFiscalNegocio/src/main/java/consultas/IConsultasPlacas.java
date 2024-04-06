@@ -7,6 +7,7 @@ package consultas;
 
 import dtos.LicenciaDTO;
 import dtos.PlacasDTO;
+import entidades.Placa;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 public interface IConsultasPlacas {
     public void AgregarPlacasNuevas(PlacasDTO p);
     public void AgregarPlacasUsadas(PlacasDTO p);
-    public void BuscarPlacas(String p);
+    public Placa BuscarPlacas(String p);
     public List<PlacasDTO> listaPlacas(String rfc);
     
     

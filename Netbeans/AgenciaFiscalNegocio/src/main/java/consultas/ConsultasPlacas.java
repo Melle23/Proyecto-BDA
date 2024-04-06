@@ -51,7 +51,7 @@ public class ConsultasPlacas implements IConsultasPlacas {
     }
 
     @Override
-    public void BuscarPlacas(String p) {
+    public Placa BuscarPlacas(String p) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

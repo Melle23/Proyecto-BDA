@@ -44,18 +44,24 @@ public class Licencia implements Serializable {
 
     @Column(name = "FechaVencimiento")
     @Temporal(TemporalType.DATE)
-    private Date fechaExpedicion;
-
+    private Date FechaVencimiento;
+    
+    @Column(name = "Activa")
+    private boolean activa;
+    
     public Licencia() {
     }
 
-    public Licencia(String RFC, Persona persona, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Date fechaExpedicion) {
+    public Licencia(String RFC, Persona persona, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Date FechaVencimiento, boolean activa) {
         this.RFC = RFC;
         this.persona = persona;
         this.tipo = tipo;
         this.vigencia = vigencia;
-        this.fechaExpedicion = fechaExpedicion;
+        this.FechaVencimiento = FechaVencimiento;
+        this.activa = activa;
     }
+
+   
 
     public Long getId() {
         return id;
@@ -81,12 +87,12 @@ public class Licencia implements Serializable {
         this.persona = persona;
     }
 
-    public Date getFechaExpedicion() {
-        return fechaExpedicion;
+    public Date getFechaVencimiento() {
+        return FechaVencimiento;
     }
 
-    public void setFechaExpedicion(Date fechaExpedicion) {
-        this.fechaExpedicion = fechaExpedicion;
+    public void setFechaVencimiento(Date FechaVencimiento) {
+        this.FechaVencimiento = FechaVencimiento;
     }
 
     public EnumTipoLicencia getTipo() {
@@ -106,35 +112,19 @@ public class Licencia implements Serializable {
     }
 //
 
-    public int calcularCosto() {
-        int costo = 0;
-
-        if (tipo == EnumTipoLicencia.NORMAL) {
-            switch (vigencia) {
-                case UNO:
-                    costo = EnumCostos.DOS_ANIOS_NORMAL.getCosto();
-                    break;
-                case DOS:
-                    costo = EnumCostos.DOS_ANIOS_NORMAL.getCosto();
-                    break;
-                case TRES:
-                    costo = EnumCostos.TRES_ANIOS_NORMAL.getCosto();
-                    break;
-            }
-        } else if (tipo == EnumTipoLicencia.DISCAPACITADOS) {
-            switch (vigencia) {
-                case UNO:
-                    costo = EnumCostos.UN_ANIO_DISCAPACITADOS.getCosto();
-                    break;
-                case DOS:
-                    costo = EnumCostos.DOS_ANIOS_DISCAPACITADOS.getCosto();
-                    break;
-                case TRES:
-                    costo = EnumCostos.TRES_ANIOS_DISCAPACITADOS.getCosto();
-                    break;
-            }
-        }
-        return costo;
+    public boolean isActiva() {
+        return activa;
     }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    @Override
+    public String toString() {
+        return "Licencia{" + "id=" + id + ", RFC=" + RFC + ", persona=" + persona + ", tipo=" + tipo + ", vigencia=" + vigencia + ", FechaVencimiento=" + FechaVencimiento + ", activa=" + activa + '}';
+    }
+
+    
 
 }

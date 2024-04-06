@@ -121,7 +121,7 @@ public class DlgHistorial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Rfc", "Vencimiento", "Vigencia", "Tipo"
+                "ID", "Rfc", "Vencimiento", "Vigencia", "Tipo", "Activa"
             }
         ));
         jScrollPane2.setViewportView(TbLicencia);
@@ -166,7 +166,8 @@ private void insertarFilaLicencias(LicenciaDTO l) {
             l.getRFC(),
             l.getFv(),
             l.getVigencia(),
-            l.getTipo()
+            l.getTipo(),
+            l.isActiva()
         };
         modeloTabla1.addRow(fila);
     }

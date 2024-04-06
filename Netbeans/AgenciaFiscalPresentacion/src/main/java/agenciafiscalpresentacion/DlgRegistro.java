@@ -5,6 +5,11 @@ import Encriptacion.EncriptacionDatos;
 import consultas.ConsultasPersonas;
 import consultas.IConsultasPersonas;
 import dtos.PersonasDTO;
+import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -98,10 +103,40 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel5.setText("Telefono:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 24));
+
+        campoRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoRFCKeyTyped(evt);
+            }
+        });
         jPanel2.add(campoRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 219, -1));
+
+        campoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNombreKeyTyped(evt);
+            }
+        });
         jPanel2.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 219, -1));
+
+        campoApellidoP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoApellidoPKeyTyped(evt);
+            }
+        });
         jPanel2.add(campoApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 219, -1));
+
+        campoApellidoM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoApellidoMKeyTyped(evt);
+            }
+        });
         jPanel2.add(campoApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 219, -1));
+
+        campoTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoTelefonoKeyTyped(evt);
+            }
+        });
         jPanel2.add(campoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 219, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -133,6 +168,12 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("CURP:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
+
+        campoCurp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoCurpKeyTyped(evt);
+            }
+        });
         jPanel2.add(campoCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 220, -1));
         jPanel2.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 130, -1));
 
@@ -207,13 +248,14 @@ public class DlgRegistro extends javax.swing.JDialog {
                 || campoCurp.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
+            if(calcularEdad()>=18){
             String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
             String rfc = campoRFC.getText();
 
             // Encriptar el teléfono antes de agregar la persona
             String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
             PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
-                    campoApellidoP.getText(), telefonoEncriptado, date.getDate(),
+                    campoApellidoP.getText(),telefonoEncriptado, date.getDate(),
                     campoCurp.getText());
 
             personaConsulta.registroPersona(personaAgregar);
@@ -221,6 +263,9 @@ public class DlgRegistro extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             control.desplegarDlgLicencia(nombreSolicitante, rfc);
             dispose();
+            }else{
+          JOptionPane.showMessageDialog(this, "No es posible realizar el registro, el solicitante es menor de edad", "Alerta", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_BotonRegistro1ActionPerformed
 
@@ -234,12 +279,81 @@ public class DlgRegistro extends javax.swing.JDialog {
         date.setDate(null);
         campoCurp.setText(" ");
     }//GEN-LAST:event_BotonLimpiarActionPerformed
-
+private int calcularEdad() {
+        Date fechaSeleccionada = date.getDate();
+        if (fechaSeleccionada != null) {
+            LocalDate fechaNacimiento = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaActual = LocalDate.now();
+            Period periodo = Period.between(fechaNacimiento, fechaActual);
+            int edad = periodo.getYears();
+           return edad;
+        }else{
+        return 0 ;
+        }
+}
     private void BotonRegreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegreso1ActionPerformed
         // TODO add your handling code here:
         control.desplegarMenu();
         dispose();
     }//GEN-LAST:event_BotonRegreso1ActionPerformed
+
+    private void campoTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoTelefonoKeyTyped
+          if (campoTelefono.getText().length() >= 10) {
+            evt.consume();
+        }
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (campoTelefono.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_campoTelefonoKeyTyped
+
+    private void campoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreKeyTyped
+        // TODO add your handling code here:
+         final char keyChar = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyChar) || (keyChar == KeyEvent.VK_BACK_SPACE) || keyChar == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_campoNombreKeyTyped
+
+    private void campoApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoPKeyTyped
+        // TODO add your handling code here:
+         final char keyChar = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyChar) || (keyChar == KeyEvent.VK_BACK_SPACE) || keyChar == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_campoApellidoPKeyTyped
+
+    private void campoApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoMKeyTyped
+        // TODO add your handling code here:
+         final char keyChar = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyChar) || (keyChar == KeyEvent.VK_BACK_SPACE) || keyChar == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_campoApellidoMKeyTyped
+
+    private void campoRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoRFCKeyTyped
+        // TODO add your handling code here:
+         if (campoRFC.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_campoRFCKeyTyped
+
+    private void campoCurpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCurpKeyTyped
+        // TODO add your handling code here:
+    char c = evt.getKeyChar();
+    if(Character.isLowerCase(c)){//Todo lo que ingresa se pone em mayúscula
+    String cad=(""+c).toUpperCase();
+    c=cad.charAt(0);
+    evt.setKeyChar(c);
+    }
+    }//GEN-LAST:event_campoCurpKeyTyped
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ import entidades.Licencia;
 import entidades.Persona;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class ConsultasLicencias implements IConsultasLicencias {
     @Override
     public void registroLicencia(LicenciaDTO l) {
         persona=BuscaPersonaPorRFC(l.getRFC());
-         Licencia nuevaLicencia=new Licencia(l.getRFC(), persona,l.getTipo(),l.getVigencia(),l.getFechaExpedicion());
+         Licencia nuevaLicencia=new Licencia(l.getRFC(), persona,l.getTipo(),l.getVigencia(),l.getFechaExpedicion(),l.isActiva());
         System.out.println("consultaLicencias");
         licencias.RegistrarLicencia(nuevaLicencia);
     }
@@ -49,7 +50,7 @@ public class ConsultasLicencias implements IConsultasLicencias {
 
         for (Licencia p : licencias) {
             LicenciaDTO licenciaDTO = new LicenciaDTO();
-            String Fechavencimiento = sdf.format(p.getFechaExpedicion());
+            String Fechavencimiento = sdf.format(p.getFechaVencimiento());
 
 
           licenciaDTO.setId(p.getId());
@@ -57,11 +58,22 @@ public class ConsultasLicencias implements IConsultasLicencias {
           licenciaDTO.setFv(Fechavencimiento);
           licenciaDTO.setVigencia(p.getVigencia());
           licenciaDTO.setTipo(p.getTipo());
+          licenciaDTO.setActiva(p.isActiva());
           
 
             lDTO.add(licenciaDTO);
         }
         return lDTO;
+    }
+
+    @Override
+    public Licencia obtenerEstadoLicencia(String rfc) {
+        return  licencias.obtenerLicencia(rfc);
+    }
+
+    @Override
+    public void actualizarLicencia(long idLicencia,Date nuevaFecha,boolean nuevoEstado) {
+        licencias.actualizarPlacas(idLicencia,nuevaFecha,nuevoEstado);
     }
 }
 
