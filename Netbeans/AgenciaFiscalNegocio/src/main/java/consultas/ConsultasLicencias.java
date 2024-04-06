@@ -73,7 +73,7 @@ public class ConsultasLicencias implements IConsultasLicencias {
 
     @Override
     public void actualizarLicencia(long idLicencia,Date nuevaFecha,boolean nuevoEstado) {
-        licencias.actualizarPlacas(idLicencia,nuevaFecha,nuevoEstado);
+        licencias.actualizarLicencias(idLicencia,nuevaFecha,nuevoEstado);
     }
 }
 

@@ -29,7 +29,7 @@ public class Placa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "NumPlacas")
+    @Column(name = "NumPlacas",unique=true)
     private String numeroPlacas;
     
 
@@ -49,15 +49,19 @@ public class Placa implements Serializable {
     @JoinColumn(name = "id_automovil")
     private Automovil automovil;
 
+    @Column(name = "Activa")
+    private boolean activa;
+    
     public Placa() {
     }
 
-    public Placa(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, Automovil automovil) {
+    public Placa(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, Automovil automovil,boolean activa) {
         this.numeroPlacas = numeroPlacas;
         this.fechaEmision = fechaEmision;
         this.fechaRecepcion = fechaRecepcion;
         this.costo = costo;
         this.automovil = automovil;
+        this.activa=activa;
     }
 
 
@@ -126,6 +130,22 @@ public class Placa implements Serializable {
     @Override
     public String toString() {
         return "Placa{" + "id=" + id + ", numeroPlacasAnt=" + numeroPlacas  + ", fechaEmision=" + fechaEmision + ", fechaRecepcion=" + fechaRecepcion + ", costo=" + costo + ", automovil=" + automovil + '}';
+    }
+
+    public String getNumeroPlacas() {
+        return numeroPlacas;
+    }
+
+    public void setNumeroPlacas(String numeroPlacas) {
+        this.numeroPlacas = numeroPlacas;
+    }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
     }
     
 }

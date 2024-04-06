@@ -89,7 +89,7 @@ public class LicenciasDAO implements ILicenciasDAO {
     }
 
     @Override
-    public void actualizarPlacas(long idLicencia,Date nuevaFecha,boolean nuevoEstado) {
+    public void actualizarLicencias(long idLicencia,Date nuevaFecha,boolean nuevoEstado) {
          EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = null;
         try {

@@ -17,5 +17,5 @@ public interface ILicenciasDAO {
   public Persona BuscarPersonaPoRFC(String rfc);
   public List<Licencia> obtenerLicenciasPorRfc(String rfc);
   public Licencia obtenerLicencia(String rfc);
-  public void actualizarPlacas(long idLicencia,Date nuevaFecha,boolean nuevoEstado);
+  public void actualizarLicencias(long idLicencia,Date nuevaFecha,boolean nuevoEstado);
 }

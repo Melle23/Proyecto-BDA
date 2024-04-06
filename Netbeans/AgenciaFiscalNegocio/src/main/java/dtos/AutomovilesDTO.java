@@ -9,6 +9,7 @@ package dtos;
  * @author delll
  */
 public class AutomovilesDTO {
+    Long idAuto;
     private String numeroSerie;
     private String marca;
     private String linea;
@@ -71,6 +72,14 @@ public class AutomovilesDTO {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public Long getIdAuto() {
+        return idAuto;
+    }
+
+    public void setIdAuto(Long idAuto) {
+        this.idAuto = idAuto;
     }
     
     

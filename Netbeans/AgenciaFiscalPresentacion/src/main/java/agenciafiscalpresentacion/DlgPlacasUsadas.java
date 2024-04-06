@@ -1,6 +1,13 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import consultas.ConsultasPlacas;
+import consultas.IConsultasPlacas;
+import dtos.AutomovilesDTO;
+import dtos.PlacasDTO;
+import java.time.LocalDate;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,9 +16,12 @@ import Control.ControlPresentacion;
 public class DlgPlacasUsadas extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
-    
+    public String rfcUsadas;
+    IConsultasPlacas placasC;
+
     /**
      * Creates new form DlgPlacasUsadas
+     *
      * @param parent
      * @param modal
      */
@@ -22,10 +32,12 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
 
     public DlgPlacasUsadas() {
         initComponents();
+        placasC = new ConsultasPlacas();
+        if (rfcUsadas != null) {
+            txtNumPlacas.setText(rfcUsadas);
+        }
         this.setVisible(true);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +58,8 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
         txtImportePlacasR = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         BotonRegreso = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
+        txtplacasN = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,14 +95,20 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Numero de Placas:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 160, -1));
-        jPanel2.add(txtNumPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 190, -1));
+        jLabel3.setText("Numero de Nuevas placas:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 160, -1));
+
+        txtNumPlacas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumPlacasKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtNumPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 190, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Importe:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
-        jPanel2.add(txtImportePlacasR, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 110, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, -1));
+        jPanel2.add(txtImportePlacasR, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, 110, -1));
 
         btnAceptar.setBackground(new java.awt.Color(153, 255, 102));
         btnAceptar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -111,11 +129,17 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
             }
         });
         jPanel2.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 30));
-        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 190, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Fecha de recepcion:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        jLabel5.setText("Numero de Anteriores:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 160, -1));
+
+        txtplacasN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtplacasNKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtplacasN, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 190, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 590, 390));
 
@@ -139,7 +163,25 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        AutomovilesDTO autoBuscado;
+        Float importe = 1000f;
+        txtImportePlacasR.setText(String.valueOf(importe));
+        autoBuscado = placasC.BuscarPlacas(txtNumPlacas.getText());
+        if (autoBuscado != null) {
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea agregar una placa nueva y cancelar las anteriores ?", "Pasar a placa usada", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == 0) {
+                LocalDate localDate = LocalDate.now();
+                //pasando la fecha localdate a date
+                Date fechaEmision = java.util.Date.from(localDate.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
+                placasC.actualizarPlacas(autoBuscado.getIdAuto(), fechaEmision, false);
+                PlacasDTO p = new PlacasDTO(txtplacasN.getText(),fechaEmision , null, importe, autoBuscado, true);
+                placasC.AgregarPlacasUsadas(p,autoBuscado.getNumeroSerie());
+                JOptionPane.showMessageDialog(this, "Placas y automovil agregados con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+            }
+        }else{
+        JOptionPane.showMessageDialog(this, "Este automovil no existe ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void BotonRegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegresoActionPerformed
@@ -149,6 +191,84 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
 
     }//GEN-LAST:event_BotonRegresoActionPerformed
 
+    private void txtNumPlacasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPlacasKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String currentText = txtNumPlacas.getText();
+
+        // Permite borrar cualquier carácter
+        if (c == '\b') {
+            return;
+        }
+
+        // Solo permite escribir letras y guión si hay menos de 3 letras
+        if (currentText.length() < 3 && Character.isLetter(c)) {
+            return;
+        }
+
+        // Permitir guión solo si hay 3 letras y no hay guión aún
+        if (currentText.length() == 3 && c == '-' && !currentText.contains("-")) {
+            return;
+        }
+
+        // Solo permite escribir dígitos si ya hay 4 caracteres (3 letras + 1 guión)
+        if (currentText.length() == 4 && Character.isDigit(c)) {
+            return;
+        }
+
+        // Solo permite escribir 3 dígitos después del guión
+        if (currentText.length() > 4 && Character.isDigit(c)) {
+            String digits = currentText.substring(5);
+            if (digits.length() < 3) {
+                return;
+            }
+        }
+
+        evt.consume(); // Si no cumple ninguna de las condiciones, consume el evento
+
+    }//GEN-LAST:event_txtNumPlacasKeyTyped
+
+    private void txtplacasNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtplacasNKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        String currentText = txtplacasN.getText();
+
+        // Permite borrar cualquier carácter
+        if (c == '\b') {
+            return;
+        }
+
+        // Solo permite escribir letras y guión si hay menos de 3 letras
+        if (currentText.length() < 3 && Character.isLetter(c)) {
+            return;
+        }
+
+        // Permitir guión solo si hay 3 letras y no hay guión aún
+        if (currentText.length() == 3 && c == '-' && !currentText.contains("-")) {
+            return;
+        }
+
+        // Solo permite escribir dígitos si ya hay 4 caracteres (3 letras + 1 guión)
+        if (currentText.length() == 4 && Character.isDigit(c)) {
+            return;
+        }
+
+        // Solo permite escribir 3 dígitos después del guión
+        if (currentText.length() > 4 && Character.isDigit(c)) {
+            String digits = currentText.substring(5);
+            if (digits.length() < 3) {
+                return;
+            }
+        }
+
+        evt.consume();
+    }//GEN-LAST:event_txtplacasNKeyTyped
+    public void limpiar() {
+        txtNumPlacas.setText("");
+        txtImportePlacasR.setText("");
+        txtplacasN.setText("");
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -194,7 +314,6 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegreso;
     private javax.swing.JButton btnAceptar;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -205,5 +324,6 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtImportePlacasR;
     private javax.swing.JTextField txtNumPlacas;
+    private javax.swing.JTextField txtplacasN;
     // End of variables declaration//GEN-END:variables
 }

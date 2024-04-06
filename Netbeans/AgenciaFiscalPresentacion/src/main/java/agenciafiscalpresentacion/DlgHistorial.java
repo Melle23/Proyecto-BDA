@@ -179,7 +179,8 @@ private void insertarFilaPlacas(PlacasDTO p) {
             p.getFechaE(),
             p.getFechaR(),
             p.getCosto(),
-            p.getIdAuto()
+            p.getIdAuto(),
+            p.isActiva()
         };
         modeloTabla2.addRow(fila);
     }

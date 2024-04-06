@@ -17,16 +17,18 @@ public class PlacasDTO {
     private Date fechaRecepcion;
     private Float costo;
     private AutomovilesDTO auto;
+    private boolean activa; 
     private String fechaR;
     private String fechaE;
     
 
-    public PlacasDTO(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, AutomovilesDTO auto) {
+    public PlacasDTO(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, AutomovilesDTO auto,boolean activa) {
         this.numeroPlacas = numeroPlacas;
         this.fechaEmision = fechaEmision;
         this.fechaRecepcion = fechaRecepcion;
         this.costo = costo;
         this.auto = auto;
+        this.activa=activa;
     }
 
     public PlacasDTO() {
@@ -98,6 +100,14 @@ public class PlacasDTO {
 
     public void setIdAuto(Long idAuto) {
         this.idAuto = idAuto;
+    }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
     }
 
     
