@@ -298,7 +298,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String importeTexto = txtImporte.getText();
-        if (comboBoxTipo.getItemCount()==1 || comboBoxVigencia.getItemCount()==1 || txtSolicitante.getText().isEmpty() || txtRFC.getText().isEmpty() || fechaVencimiento.getDate() == null) {
+        if (comboBoxTipo.getItemCount()==0 || comboBoxVigencia.getItemCount()==0 || txtSolicitante.getText().isEmpty() || txtRFC.getText().isEmpty() || fechaVencimiento.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             String tipoSeleccionado = comboBoxTipo.getSelectedItem().toString();

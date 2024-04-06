@@ -42,10 +42,13 @@ public class DlgReporte extends javax.swing.JDialog {
         reporte = new javax.swing.JPanel();
         BotonRegreso = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REPORTE");
-        setPreferredSize(new java.awt.Dimension(698, 480));
+        setPreferredSize(new java.awt.Dimension(698, 500));
 
         reporte.setBackground(new java.awt.Color(230, 243, 230));
         reporte.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,23 +60,49 @@ public class DlgReporte extends javax.swing.JDialog {
                 BotonRegresoActionPerformed(evt);
             }
         });
-        reporte.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 90, 30));
+        reporte.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 90, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setText("VISUALIZACIÓN DE DATOS");
         reporte.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 340, 50));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+        );
+
+        reporte.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 600, 350));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(reporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
         );
 
         pack();
@@ -131,6 +160,9 @@ public class DlgReporte extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegreso;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel reporte;
     // End of variables declaration//GEN-END:variables
 }

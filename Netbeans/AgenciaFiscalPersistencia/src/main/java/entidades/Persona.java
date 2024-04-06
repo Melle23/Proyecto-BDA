@@ -125,7 +125,7 @@ public class Persona implements Serializable {
         this.curp = curp;
     }
 
-    public String getEncriptado(){
+    public String getDesencriptado(){
         return decriptar(telefono);
     }
     
