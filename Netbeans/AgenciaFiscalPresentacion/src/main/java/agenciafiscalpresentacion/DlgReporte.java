@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
@@ -16,6 +13,8 @@ public class DlgReporte extends javax.swing.JDialog {
 
     /**
      * Creates new form DlgReporte
+     * @param parent
+     * @param modal
      */
     public DlgReporte(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

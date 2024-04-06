@@ -9,11 +9,13 @@ import java.util.Date;
  * @author delll
  */
 public class LicenciaDTO {
+    Long id;
     String RFC;
     EnumTipoLicencia tipo;
     EnumVigenciaLicencia vigencia;
     Float costo;
     Date FechaExpedicion;
+    String Fv;
 
     public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaExpedicion) {
         this.RFC = RFC;
@@ -21,6 +23,9 @@ public class LicenciaDTO {
         this.vigencia = vigencia;
         this.costo = costo;
         this.FechaExpedicion = FechaExpedicion;
+    }
+
+    public LicenciaDTO() {
     }
   
 
@@ -63,6 +68,22 @@ public class LicenciaDTO {
 
     public void setFechaExpedicion(Date FechaExpedicion) {
         this.FechaExpedicion = FechaExpedicion;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFv() {
+        return Fv;
+    }
+
+    public void setFv(String Fv) {
+        this.Fv = Fv;
     }
     
     

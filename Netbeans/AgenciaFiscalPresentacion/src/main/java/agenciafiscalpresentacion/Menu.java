@@ -201,6 +201,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void BotonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultasActionPerformed
         // TODO add your handling code here:
+
+        control.desplegarDlgConsultas();
+        dispose();
+
     }//GEN-LAST:event_BotonConsultasActionPerformed
 
     /**

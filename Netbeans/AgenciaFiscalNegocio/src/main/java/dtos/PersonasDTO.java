@@ -15,6 +15,8 @@ public class PersonasDTO {
     String Telefono;
     Date FechaNacimiento;
     String Curp;
+    String Fecha;
+    
 
     public PersonasDTO(String RFC, String Nombre, String ApellidoM, String ApellidoP, String Telefono, Date FechaNacimiento, String Curp) {
         this.RFC = RFC;
@@ -26,7 +28,17 @@ public class PersonasDTO {
         this.Curp = Curp;
     }
 
-   
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public String getFecha() {
+        return Fecha;
+    }
+    
+
+    public PersonasDTO() {
+    }
 
     public String getRFC() {
         return RFC;

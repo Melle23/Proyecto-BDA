@@ -1,5 +1,7 @@
 package Control;
 
+import agenciafiscalpresentacion.DlgConsultas;
+import agenciafiscalpresentacion.DlgHistorial;
 import agenciafiscalpresentacion.DlgLicencia;
 import agenciafiscalpresentacion.DlgPlacasNuevas;
 import agenciafiscalpresentacion.DlgPlacasUsadas;
@@ -25,7 +27,7 @@ public class ControlPresentacion {
     }
 
     public void desplegarDlgLicencia(String nombreSolicitante, String rfc) {
-        DlgLicencia dlgLicencia = new DlgLicencia(null, true);
+        DlgLicencia dlgLicencia = new DlgLicencia();
 
         dlgLicencia.mostrarNombreSolicitante(nombreSolicitante);
         dlgLicencia.mostrarRFC(rfc);
@@ -48,5 +50,11 @@ public class ControlPresentacion {
 
     public void desplegarDlgReporte(){
         DlgReporte dlgReporte = new DlgReporte();
+    }
+    public void desplegarDlgConsultas(){
+        DlgConsultas dlgConsultas=new DlgConsultas();
+    }
+    public void desplegarDlgHistorial(String rfc){
+        DlgHistorial dlgHistorial=new DlgHistorial(rfc);
     }
 }

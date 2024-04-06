@@ -46,6 +46,8 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
         txtImportePlacasR = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         BotonRegreso = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -100,14 +102,20 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
         });
         jPanel2.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 130, 40));
 
-        BotonRegreso.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        BotonRegreso.setBackground(new java.awt.Color(153, 255, 102));
+        BotonRegreso.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         BotonRegreso.setText("Volver");
         BotonRegreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonRegresoActionPerformed(evt);
             }
         });
-        jPanel2.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 90, 30));
+        jPanel2.add(BotonRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 30));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 190, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Fecha de recepcion:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 590, 390));
 
@@ -186,10 +194,12 @@ public class DlgPlacasUsadas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegreso;
     private javax.swing.JButton btnAceptar;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

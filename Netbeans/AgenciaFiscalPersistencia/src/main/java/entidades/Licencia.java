@@ -42,7 +42,7 @@ public class Licencia implements Serializable {
     @Enumerated(EnumType.STRING)
     private EnumVigenciaLicencia vigencia;
 
-    @Column(name = "FechaExpedicion")
+    @Column(name = "FechaVencimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaExpedicion;
 
