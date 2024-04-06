@@ -31,7 +31,7 @@ public class DlgRegistro extends javax.swing.JDialog {
         super(parent, modal);
 
         initComponents();
-
+        
     }
 
     public DlgRegistro() {
@@ -66,9 +66,9 @@ public class DlgRegistro extends javax.swing.JDialog {
         BotonRegistro1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         campoCurp = new javax.swing.JTextField();
-        date = new com.toedter.calendar.JDateChooser();
         BotonLimpiar = new javax.swing.JButton();
         BotonRegreso1 = new javax.swing.JButton();
+        fecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REGISTRO");
@@ -175,7 +175,6 @@ public class DlgRegistro extends javax.swing.JDialog {
             }
         });
         jPanel2.add(campoCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 220, -1));
-        jPanel2.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 130, -1));
 
         BotonLimpiar.setBackground(new java.awt.Color(153, 255, 102));
         BotonLimpiar.setFont(new java.awt.Font("Segoe UI Black", 1, 8)); // NOI18N
@@ -196,6 +195,7 @@ public class DlgRegistro extends javax.swing.JDialog {
             }
         });
         jPanel2.add(BotonRegreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 30));
+        jPanel2.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 620, 410));
 
@@ -216,14 +216,14 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
         // TODO add your handling code here:
-        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null || campoCurp.getText().isEmpty()) {
+        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || fecha.getDate() == null || campoCurp.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los espacios", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             // Encriptar el teléfono antes de agregar la persona
             String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
 
             // Guardando en un DTO
-            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), telefonoEncriptado, date.getDate(), campoCurp.getText());
+            PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(), campoApellidoP.getText(), telefonoEncriptado, fecha.getDate(), campoCurp.getText());
 
             personaConsulta.registroPersona(personaAgregar);
 
@@ -234,7 +234,7 @@ public class DlgRegistro extends javax.swing.JDialog {
             campoCurp.setText("");
             campoNombre.setText("");
             campoTelefono.setText("");
-            date.setDate(null);
+            fecha.setDate(null);
         }
 
         control.desplegarMenu();
@@ -244,7 +244,7 @@ public class DlgRegistro extends javax.swing.JDialog {
     private void BotonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistro1ActionPerformed
         // Verifica si los campos están vacíos
         if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty()
-                || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null
+                || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || fecha.getDate() == null
                 || campoCurp.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -255,7 +255,7 @@ public class DlgRegistro extends javax.swing.JDialog {
             // Encriptar el teléfono antes de agregar la persona
             String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
             PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
-                    campoApellidoP.getText(),telefonoEncriptado, date.getDate(),
+                    campoApellidoP.getText(),telefonoEncriptado, fecha.getDate(),
                     campoCurp.getText());
 
             personaConsulta.registroPersona(personaAgregar);
@@ -276,11 +276,11 @@ public class DlgRegistro extends javax.swing.JDialog {
         campoApellidoP.setText(" ");
         campoApellidoM.setText(" ");
         campoTelefono.setText(" ");
-        date.setDate(null);
+        fecha.setDate(null);
         campoCurp.setText(" ");
     }//GEN-LAST:event_BotonLimpiarActionPerformed
 private int calcularEdad() {
-        Date fechaSeleccionada = date.getDate();
+        Date fechaSeleccionada = fecha.getDate();
         if (fechaSeleccionada != null) {
             LocalDate fechaNacimiento = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate fechaActual = LocalDate.now();
@@ -408,7 +408,7 @@ private int calcularEdad() {
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoRFC;
     private javax.swing.JTextField campoTelefono;
-    private com.toedter.calendar.JDateChooser date;
+    private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
