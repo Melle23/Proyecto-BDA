@@ -25,7 +25,7 @@ public class ConsultasLicencias implements IConsultasLicencias {
     @Override
     public void registroLicencia(LicenciaDTO l) {
         persona=BuscaPersonaPorRFC(l.getRFC());
-         Licencia nuevaLicencia=new Licencia(l.getRFC(), persona,l.getTipo(),l.getVigencia(),l.getFechaExpedicion(),l.isActiva());
+         Licencia nuevaLicencia=new Licencia(l.getRFC(), persona,l.getTipo(),l.getVigencia(),l.getFechaVencimiento(),l.isActiva());
         System.out.println("consultaLicencias");
         licencias.RegistrarLicencia(nuevaLicencia);
     }

@@ -9,27 +9,27 @@ import java.util.Date;
  * @author delll
  */
 public class LicenciaDTO {
+
     Long id;
     String RFC;
     EnumTipoLicencia tipo;
     EnumVigenciaLicencia vigencia;
     Float costo;
-    Date FechaExpedicion;
+    Date FechaVencimiento;
     boolean activa;
     String Fv;
 
-    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaExpedicion,boolean activa) {
+    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaVencimiento, boolean activa) {
         this.RFC = RFC;
         this.tipo = tipo;
         this.vigencia = vigencia;
         this.costo = costo;
-        this.FechaExpedicion = FechaExpedicion;
-        this.activa=activa;
+        this.FechaVencimiento = FechaVencimiento;
+        this.activa = activa;
     }
 
     public LicenciaDTO() {
     }
-  
 
     public String getRFC() {
         return RFC;
@@ -55,7 +55,6 @@ public class LicenciaDTO {
         this.vigencia = vigencia;
     }
 
-
     public Float getCosto() {
         return costo;
     }
@@ -64,12 +63,12 @@ public class LicenciaDTO {
         this.costo = costo;
     }
 
-    public Date getFechaExpedicion() {
-        return FechaExpedicion;
+    public Date getFechaVencimiento() {
+        return FechaVencimiento;
     }
 
-    public void setFechaExpedicion(Date FechaExpedicion) {
-        this.FechaExpedicion = FechaExpedicion;
+    public void setFechaVencimiento(Date FechaVencimiento) {
+        this.FechaVencimiento = FechaVencimiento;
     }
 
     public Long getId() {
@@ -95,6 +94,5 @@ public class LicenciaDTO {
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
-    
-    
+
 }

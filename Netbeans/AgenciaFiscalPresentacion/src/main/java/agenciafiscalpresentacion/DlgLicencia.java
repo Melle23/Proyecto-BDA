@@ -341,6 +341,8 @@ public class DlgLicencia extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "El RFC que ingreso no existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+        control.desplegarMenu();
+        dispose();
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -449,6 +451,7 @@ public class DlgLicencia extends javax.swing.JDialog {
 
     }
 
+    
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
         // TODO add your handling code here:
         if (txtRFC.getText().length() >= 13) {

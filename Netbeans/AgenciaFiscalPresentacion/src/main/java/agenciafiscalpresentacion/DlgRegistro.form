@@ -153,6 +153,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoApellidoP">
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoApellidoPActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoApellidoPKeyTyped"/>
               </Events>
               <Constraints>

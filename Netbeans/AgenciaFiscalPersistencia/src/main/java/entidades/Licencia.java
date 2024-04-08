@@ -2,7 +2,6 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -110,7 +109,6 @@ public class Licencia implements Serializable {
     public void setVigencia(EnumVigenciaLicencia vigencia) {
         this.vigencia = vigencia;
     }
-//
 
     public boolean isActiva() {
         return activa;
