@@ -62,7 +62,8 @@ private boolean registroEnviado = false;
         persona.insercion();
         registroEnviado = true;
     } else {
-        System.out.println("El registro ya ha sido enviado previamente.");
+       throw new IllegalArgumentException("El registro ya ha sido enviado previamente.");
+        
     }
   }
    

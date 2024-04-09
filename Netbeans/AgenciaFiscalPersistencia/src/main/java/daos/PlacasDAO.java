@@ -71,7 +71,7 @@ EntityManager em = emf.createEntityManager();
     public Automovil BuscarPlacas(String p) {
  EntityManager em = emf.createEntityManager();
  try {
-                   String jpql = "SELECT a FROM Automovil a WHERE a.numeroSerie = :p ORDER BY a.id DESC";
+      String jpql = "SELECT a FROM Automovil a WHERE a.numeroSerie = :p ORDER BY a.id DESC";
 
         
         TypedQuery<Automovil> query = em.createQuery(jpql, Automovil.class);
