@@ -222,43 +222,6 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     private void BotonInsercionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInsercionActionPerformed
         // TODO add your handling code here:
-//        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null || campoCurp.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Por favor, complete todos los espacios", "Alerta", JOptionPane.WARNING_MESSAGE);
-//        } else {
-//            // Llama al método para validar la CURP
-//            if (validarCurp(campoCurp.getText())) {
-//                // CURP válida, procede con el registro
-//                if (calcularEdad() >= 18) {
-//                    String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
-//                    String rfc = campoRFC.getText();
-//
-//                    // Encriptar el teléfono antes de agregar la persona
-//                    String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
-//                    PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
-//                            campoApellidoP.getText(), telefonoEncriptado, date.getDate(),
-//                            campoCurp.getText());
-//
-//                    personaConsulta.registroPersona(personaAgregar);
-//
-//                    String[] botones = {"Si", "No"};
-//
-//                    int variable = JOptionPane.showOptionDialog(null, "La persona fue registrada con exito, ¿Desea regresar al menú? ", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null/*icono*/, botones, botones[0]);
-//
-//                    if (variable == 0) {
-//                        control.desplegarMenu();
-//                        dispose();
-//                    } else {
-//                        return;
-//                    }             
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "No es posible realizar el registro, el solicitante es menor de edad", "Alerta", JOptionPane.WARNING_MESSAGE);
-//                }
-//            } else {
-//                // CURP inválida, muestra un mensaje y detiene el proceso de registro
-//                JOptionPane.showMessageDialog(this, "La CURP ingresada no es válida", "Alerta", JOptionPane.WARNING_MESSAGE);
-//            }
-//
-//        }
     try{
     personaConsulta.insercion();
     JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);

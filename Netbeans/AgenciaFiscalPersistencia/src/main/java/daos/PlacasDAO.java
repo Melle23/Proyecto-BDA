@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daos;
 
 import entidades.Automovil;
@@ -21,16 +17,17 @@ import javax.persistence.TypedQuery;
  *
  * @author delll
  */
-public class PlacasDAO implements IPlacasDAO  {
+public class PlacasDAO implements IPlacasDAO {
+
     private EntityManagerFactory emf;
 
     public PlacasDAO() {
-          emf = Persistence.createEntityManagerFactory("ConexionPU");
+        emf = Persistence.createEntityManagerFactory("ConexionPU");
     }
 
     @Override
     public void AgregarPlacasNuevas(Placa p, Automovil a) {
-          //System.out.println("llego");        
+        //System.out.println("llego");        
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -51,7 +48,7 @@ public class PlacasDAO implements IPlacasDAO  {
 
     @Override
     public void AgregarPlacasUsadas(Placa p) {
-EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(p);
@@ -64,46 +61,41 @@ EntityManager em = emf.createEntityManager();
         } finally {
             em.close();
 
-        }    
+        }
     }
 
     @Override
     public Automovil BuscarPlacas(String p) {
- EntityManager em = emf.createEntityManager();
- try {
-      String jpql = "SELECT a FROM Automovil a WHERE a.numeroSerie = :p ORDER BY a.id DESC";
+        EntityManager em = emf.createEntityManager();
+        try {
+            String jpql = "SELECT a FROM Automovil a WHERE a.numeroSerie = :p ORDER BY a.id DESC";
 
-        
-        TypedQuery<Automovil> query = em.createQuery(jpql, Automovil.class);
-        query.setParameter("p", p);
-        query.setMaxResults(1); // Limitar el resultado a un auto
-        return query.getSingleResult();
-    }
-    catch (NoResultException ex) {
+            TypedQuery<Automovil> query = em.createQuery(jpql, Automovil.class);
+            query.setParameter("p", p);
+            query.setMaxResults(1); // Limitar el resultado a un auto
+            return query.getSingleResult();
+        } catch (NoResultException ex) {
             // Manejar la excepción cuando no se encuentra ninguna licencia
             System.out.println("No se encontró ningun Auto para el numSerie proporcionado.");
-        return null;
+            return null;
+        }
+
     }
-       
-
-   }
-
-   
 
     @Override
     public List<Placa> obtenerPlacasPorRfc(String rfc) {
-         EntityManager em = emf.createEntityManager();
-         String jpql = "SELECT p FROM Placa p WHERE p.automovil.persona.rfc = :rfc";
+        EntityManager em = emf.createEntityManager();
+        String jpql = "SELECT p FROM Placa p WHERE p.automovil.persona.rfc = :rfc";
 
         Query query = em.createQuery(jpql);
         query.setParameter("rfc", rfc);
 
         return query.getResultList();
     }
-    
-      @Override
-    public void actualizarPlacas(long id,Date FechaR,boolean nuevoEstado) {
-         EntityManager em = emf.createEntityManager();
+
+    @Override
+    public void actualizarPlacas(long id, Date FechaR, boolean nuevoEstado) {
+        EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = em.getTransaction();
@@ -111,7 +103,7 @@ EntityManager em = emf.createEntityManager();
 
             String jpql = "UPDATE Placa p SET p.fechaRecepcion = :FechaR, p.activa = :nuevoEstado WHERE p.id = :id";
             int up = em.createQuery(jpql)
-                    .setParameter("FechaR",FechaR )
+                    .setParameter("FechaR", FechaR)
                     .setParameter("nuevoEstado", nuevoEstado)
                     .setParameter("id", id)
                     .executeUpdate();
@@ -125,6 +117,5 @@ EntityManager em = emf.createEntityManager();
             throw e; //exception rollback
         }
 
-
     }
-}   
+}

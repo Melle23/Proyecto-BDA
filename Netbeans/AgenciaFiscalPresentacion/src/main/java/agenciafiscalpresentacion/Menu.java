@@ -12,8 +12,7 @@ import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
 
     ControlPresentacion control = new ControlPresentacion();
-    public Image fondo1;
-    public Image fondo2;
+    
     /**
      * Creates new form Menu
      */
@@ -39,7 +38,6 @@ public class Menu extends javax.swing.JFrame {
         BotonPlacas = new javax.swing.JButton();
         BotonConsultas = new javax.swing.JButton();
         BotonReportes = new javax.swing.JButton();
-        btnIncersion = new javax.swing.JButton();
         Imagen1 = new javax.swing.JLabel();
         BotonCerrar = new javax.swing.JButton();
 
@@ -133,17 +131,6 @@ public class Menu extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
-
-        btnIncersion.setBackground(new java.awt.Color(51, 102, 0));
-        btnIncersion.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        btnIncersion.setForeground(new java.awt.Color(255, 255, 255));
-        btnIncersion.setText("Incersion de Personas");
-        btnIncersion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIncersionActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnIncersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 240, 40));
         jPanel1.add(Imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 490, 410));
 
         BotonCerrar.setBackground(new java.awt.Color(51, 102, 0));
@@ -215,13 +202,6 @@ public class Menu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BotonConsultasActionPerformed
 
-    private void btnIncersionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncersionActionPerformed
-        // TODO add your handling code here:
-        PersonasDAO insercion = new PersonasDAO();
-        insercion.insertarPersonas();       
-        
-    }//GEN-LAST:event_btnIncersionActionPerformed
-
     private void BotonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarActionPerformed
         // TODO add your handling code here:
         String[] botones = {"Si", "No"};
@@ -280,7 +260,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JButton BotonReportes;
     private javax.swing.JLabel Imagen1;
-    private javax.swing.JButton btnIncersion;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
