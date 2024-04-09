@@ -112,7 +112,26 @@ public class ConsultasPlacas implements IConsultasPlacas {
         placas.actualizarPlacas(id, FechaR, nuevoEstado);
     }
     
-    
+    @Override
+    public List<PlacasDTO> obtenerInformacionPlacas() {
+        List<Placa> placas = this.placas.obtenerDetallesPlacas();
+        List<PlacasDTO> placasInfo = new ArrayList<>();
+
+        for (Placa p : placas) {
+            PlacasDTO placaDTO = new PlacasDTO();
+            placaDTO.setNumeroPlacas(p.getNumeroPlacas());
+            placaDTO.setFechaEmision(p.getFechaEmision());
+            placaDTO.setFechaRecepcion(p.getFechaRecepcion());
+            placaDTO.setCosto(p.getCosto());
+            placaDTO.setAuto(new AutomovilesDTO(p.getAutomovil().getNumeroSerie(), p.getAutomovil().getMarca(), p.getAutomovil().getLinea(), p.getAutomovil().getColor(), p.getAutomovil().getModelo(), p.getAutomovil().getPersona().getRfc()));
+            placaDTO.setActiva(p.isActiva());
+            placaDTO.setRfcDueno(placaDTO.getAuto().getRfc());
+
+            placasInfo.add(placaDTO);
+        }
+
+        return placasInfo;
+    }
     
 
    

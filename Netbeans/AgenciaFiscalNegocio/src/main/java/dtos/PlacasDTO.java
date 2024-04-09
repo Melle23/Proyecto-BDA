@@ -20,6 +20,7 @@ public class PlacasDTO {
     private boolean activa; 
     private String fechaR;
     private String fechaE;
+    private String rfcDueno;
     
 
     public PlacasDTO(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, AutomovilesDTO auto,boolean activa) {
@@ -31,6 +32,24 @@ public class PlacasDTO {
         this.activa=activa;
     }
 
+    public PlacasDTO(String numeroPlacas, Date fechaEmision, Date fechaRecepcion, Float costo, AutomovilesDTO auto,boolean activa, String rfcDueno) {
+        this.numeroPlacas = numeroPlacas;
+        this.fechaEmision = fechaEmision;
+        this.fechaRecepcion = fechaRecepcion;
+        this.costo = costo;
+        this.auto = auto;
+        this.activa=activa;
+        this.rfcDueno = rfcDueno;
+    }
+
+    public String getRfcDueno() {
+        return rfcDueno;
+    }
+
+    public void setRfcDueno(String rfcDueno) {
+        this.rfcDueno = rfcDueno;
+    }
+    
     public PlacasDTO() {
     }
 

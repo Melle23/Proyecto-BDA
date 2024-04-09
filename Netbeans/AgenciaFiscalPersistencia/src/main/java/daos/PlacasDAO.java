@@ -118,4 +118,14 @@ public class PlacasDAO implements IPlacasDAO {
         }
 
     }
+    
+    @Override
+    public List<Placa> obtenerDetallesPlacas() {
+        EntityManager em = emf.createEntityManager();
+        String jpql = "SELECT p FROM Placa p";
+
+        Query query = em.createQuery(jpql);
+
+        return query.getResultList();
+    }
 }

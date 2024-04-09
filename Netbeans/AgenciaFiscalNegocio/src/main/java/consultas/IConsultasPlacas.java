@@ -21,7 +21,7 @@ public interface IConsultasPlacas {
     public AutomovilesDTO BuscarPlacas(String p);
     public List<PlacasDTO> listaPlacas(String rfc);
     public void actualizarPlacas(long id,Date FechaR,boolean nuevoEstado);
-
+    public List<PlacasDTO> obtenerInformacionPlacas();
     
         
        

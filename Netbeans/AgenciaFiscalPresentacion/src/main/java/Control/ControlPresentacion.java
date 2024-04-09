@@ -9,6 +9,7 @@ import agenciafiscalpresentacion.DlgRegistro;
 import agenciafiscalpresentacion.DlgReporte;
 import agenciafiscalpresentacion.Menu;
 import consultas.ConsultasLicencias;
+import consultas.ConsultasPlacas;
 import java.util.List;
 
 /**
@@ -64,5 +65,8 @@ public class ControlPresentacion {
         ConsultasLicencias c = new ConsultasLicencias();
         return c.obtenerDetallesLicencias();
     }
-    
+    public List obtenerDetallesPlacas() {
+        ConsultasPlacas c = new ConsultasPlacas();
+        return c.obtenerInformacionPlacas();
+    }
 }

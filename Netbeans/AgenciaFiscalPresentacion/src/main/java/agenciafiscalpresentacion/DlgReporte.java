@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DlgReporte extends javax.swing.JDialog {
 
-        ControlPresentacion control = new ControlPresentacion();
+    ControlPresentacion control = new ControlPresentacion();
 
     /**
      * Creates new form DlgReporte
@@ -37,6 +37,7 @@ public class DlgReporte extends javax.swing.JDialog {
 
     public void llenarTabla() {
         List<LicenciaDTO> detallesLicencias = control.obtenerDetallesLicencias();
+        List<PlacasDTO> detallesPlacas = control.obtenerDetallesPlacas();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Limpia la tabla antes de llenarla
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Formato de fecha
@@ -47,6 +48,15 @@ public class DlgReporte extends javax.swing.JDialog {
             row[1] = "Licencia";
             row[2] = licencia.getRFC();
             row[3] = licencia.getCosto();
+            model.addRow(row);
+        }
+
+        for (PlacasDTO placa : detallesPlacas) {
+            Object[] row = new Object[4];
+            row[0] = sdf.format(placa.getFechaEmision()); // Formatea la fecha
+            row[1] = "Placas";
+            row[2] = placa.getAuto().getRfc();
+            row[3] = placa.getCosto();
             model.addRow(row);
         }
     }

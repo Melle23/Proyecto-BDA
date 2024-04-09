@@ -16,5 +16,6 @@ public interface IPlacasDAO {
     public Automovil BuscarPlacas(String p);
     public List<Placa> obtenerPlacasPorRfc(String rfc);
     public void actualizarPlacas(long id,Date FechaR,boolean nuevoEstado);
+    public List<Placa> obtenerDetallesPlacas();
     //public int buscarAutoPorId(int id);
 }
