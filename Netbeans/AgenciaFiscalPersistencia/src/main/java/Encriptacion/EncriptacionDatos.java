@@ -14,6 +14,10 @@ public class EncriptacionDatos {
 
     public static SecureRandom sr = new SecureRandom();
 
+    public EncriptacionDatos() {
+    }
+
+    
     public static String encriptar(String value) {
         String clave = "pruebaencripta23";
 

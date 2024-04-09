@@ -1,6 +1,8 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import daos.PersonasDAO;
+import java.awt.Image;
 import javax.swing.JOptionPane;
 
 /**
@@ -10,7 +12,8 @@ import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
 
     ControlPresentacion control = new ControlPresentacion();
-
+    public Image fondo1;
+    public Image fondo2;
     /**
      * Creates new form Menu
      */
@@ -36,6 +39,8 @@ public class Menu extends javax.swing.JFrame {
         BotonPlacas = new javax.swing.JButton();
         BotonConsultas = new javax.swing.JButton();
         BotonReportes = new javax.swing.JButton();
+        btnIncersion = new javax.swing.JButton();
+        Imagen1 = new javax.swing.JLabel();
         BotonCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,7 +114,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(BotonPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                .addGap(55, 55, 55))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +132,19 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 42, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+
+        btnIncersion.setBackground(new java.awt.Color(51, 102, 0));
+        btnIncersion.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        btnIncersion.setForeground(new java.awt.Color(255, 255, 255));
+        btnIncersion.setText("Incersion de Personas");
+        btnIncersion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncersionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnIncersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 240, 40));
+        jPanel1.add(Imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 490, 410));
 
         BotonCerrar.setBackground(new java.awt.Color(51, 102, 0));
         BotonCerrar.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -138,13 +155,13 @@ public class Menu extends javax.swing.JFrame {
                 BotonCerrarActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 410, 90, 40));
+        jPanel1.add(BotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,19 +215,28 @@ public class Menu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BotonConsultasActionPerformed
 
+    private void btnIncersionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncersionActionPerformed
+        // TODO add your handling code here:
+        PersonasDAO insercion = new PersonasDAO();
+        insercion.insertarPersonas();       
+        
+    }//GEN-LAST:event_btnIncersionActionPerformed
+
     private void BotonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarActionPerformed
         // TODO add your handling code here:
         String[] botones = {"Si", "No"};
 
-        int variable = JOptionPane.showOptionDialog(null, "¿Esta segur@ de cerrar la aplicación? ", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null/*icono*/, botones, botones[0]);
+        int variable = JOptionPane.showOptionDialog(null, "¿Desea cerrar la aplicacion?", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null/*icono*/, botones, botones[0]);
 
-        if (variable == 0) {
+        if(variable == 0){
             dispose();
-        } else {
+        }else{
             return;
         }
     }//GEN-LAST:event_BotonCerrarActionPerformed
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -253,6 +279,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BotonPlacas;
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JButton BotonReportes;
+    private javax.swing.JLabel Imagen1;
+    private javax.swing.JButton btnIncersion;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
