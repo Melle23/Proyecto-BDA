@@ -12,6 +12,7 @@ import java.util.List;
 public interface IPersonaDAO {
     
       public void RegistrarPersona(Persona persona);
+      public void insertarPersonas();
       public List<Persona> obtenerPersonas();
        public void insercion();
 }
