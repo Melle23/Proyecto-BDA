@@ -16,4 +16,5 @@ public interface IConsultasLicencias {
     public List<LicenciaDTO> listaLicencias(String rfc);
     public Licencia obtenerEstadoLicencia(String rfc);
     public void actualizarLicencia(long idLicencia,Date nuevaFecha,boolean nuevoEstado);
+    public List<LicenciaDTO> obtenerDetallesLicencias();
 }

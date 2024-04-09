@@ -5,6 +5,13 @@
 package agenciafiscalpresentacion;
 
 import Control.ControlPresentacion;
+import consultas.ConsultasPlacas;
+import dtos.LicenciaDTO;
+import dtos.PlacasDTO;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,11 +31,25 @@ public class DlgReporte extends javax.swing.JDialog {
 
     public DlgReporte() {
         initComponents();
+        llenarTabla();
         this.setVisible(true);
-
     }
 
-    
+    public void llenarTabla() {
+        List<LicenciaDTO> detallesLicencias = control.obtenerDetallesLicencias();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Limpia la tabla antes de llenarla
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Formato de fecha
+
+        for (LicenciaDTO licencia : detallesLicencias) {
+            Object[] row = new Object[4];
+            row[0] = sdf.format(licencia.getFechaRegistro()); // Formatea la fecha
+            row[1] = "Licencia";
+            row[2] = licencia.getRFC();
+            row[3] = licencia.getCosto();
+            model.addRow(row);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +63,8 @@ public class DlgReporte extends javax.swing.JDialog {
         reporte = new javax.swing.JPanel();
         BotonRegreso = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REPORTE");
@@ -63,11 +86,26 @@ public class DlgReporte extends javax.swing.JDialog {
         jLabel1.setText("VISUALIZACIÓN DE DATOS");
         reporte.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 340, 50));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Fecha", "Tipo", "Solicitante", "Costo"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        reporte.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 630, 170));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(reporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(reporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +169,8 @@ public class DlgReporte extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegreso;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel reporte;
     // End of variables declaration//GEN-END:variables
 }

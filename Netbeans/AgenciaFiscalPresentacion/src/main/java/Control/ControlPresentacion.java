@@ -8,6 +8,8 @@ import agenciafiscalpresentacion.DlgPlacasUsadas;
 import agenciafiscalpresentacion.DlgRegistro;
 import agenciafiscalpresentacion.DlgReporte;
 import agenciafiscalpresentacion.Menu;
+import consultas.ConsultasLicencias;
+import java.util.List;
 
 /**
  *
@@ -57,4 +59,10 @@ public class ControlPresentacion {
     public void desplegarDlgHistorial(String rfc){
         DlgHistorial dlgHistorial=new DlgHistorial(rfc);
     }
+    
+    public List obtenerDetallesLicencias() {
+        ConsultasLicencias c = new ConsultasLicencias();
+        return c.obtenerDetallesLicencias();
+    }
+    
 }

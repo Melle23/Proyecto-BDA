@@ -16,6 +16,7 @@ public class LicenciaDTO {
     EnumVigenciaLicencia vigencia;
     Float costo;
     Date FechaVencimiento;
+    Date FechaRegistro;
     boolean activa;
     String Fv;
 
@@ -28,6 +29,24 @@ public class LicenciaDTO {
         this.activa = activa;
     }
 
+    public LicenciaDTO(String RFC, EnumTipoLicencia tipo, EnumVigenciaLicencia vigencia, Float costo, Date FechaVencimiento, Date FechaRegistro, boolean activa) {
+        this.RFC = RFC;
+        this.tipo = tipo;
+        this.vigencia = vigencia;
+        this.costo = costo;
+        this.FechaVencimiento = FechaVencimiento;
+        this.FechaRegistro = FechaRegistro;
+        this.activa = activa;
+    }
+
+    public Date getFechaRegistro() {
+        return FechaRegistro;
+    }
+
+    public void setFechaRegistro(Date FechaRegistro) {
+        this.FechaRegistro = FechaRegistro;
+    }
+    
     public LicenciaDTO() {
     }
 

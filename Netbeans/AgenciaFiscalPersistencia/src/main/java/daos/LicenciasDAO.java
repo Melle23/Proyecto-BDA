@@ -114,5 +114,17 @@ public class LicenciasDAO implements ILicenciasDAO {
 
 
     }
+    
+    @Override
+    public List<Licencia> obtenerTodasLasLicencias() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String jpql = "SELECT l FROM Licencia l";
+            TypedQuery<Licencia> query = em.createQuery(jpql, Licencia.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 
 }
