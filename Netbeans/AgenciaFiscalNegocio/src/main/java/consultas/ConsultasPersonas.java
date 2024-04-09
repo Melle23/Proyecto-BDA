@@ -6,7 +6,10 @@ import dtos.PersonasDTO;
 import entidades.Persona;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -14,7 +17,7 @@ import java.util.List;
  */
 public class ConsultasPersonas implements IConsultasPersonas{
 IPersonaDAO persona;
-
+private boolean registroEnviado = false;
     public ConsultasPersonas() {
         persona=new PersonasDAO();
     }
@@ -53,4 +56,15 @@ IPersonaDAO persona;
         return personasDTO;
     }
     
+@Override
+    public void insercion(){
+         if (!registroEnviado) {
+        persona.insercion();
+        registroEnviado = true;
+    } else {
+        System.out.println("El registro ya ha sido enviado previamente.");
+    }
+  }
+   
 }
+

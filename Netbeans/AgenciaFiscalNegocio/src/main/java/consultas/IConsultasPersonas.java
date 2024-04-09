@@ -12,4 +12,5 @@ public interface IConsultasPersonas {
     public void registroPersona(PersonasDTO p);
     public List<PersonasDTO> obtenerListaPersonas();
     public List<PersonasDTO> convertirPersonasADTOs(List<Persona> personas);
+    public void insercion();
 }

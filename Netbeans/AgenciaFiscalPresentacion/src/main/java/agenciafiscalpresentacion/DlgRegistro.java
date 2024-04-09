@@ -20,6 +20,7 @@ public class DlgRegistro extends javax.swing.JDialog {
 
     ControlPresentacion control = new ControlPresentacion();
     IConsultasPersonas personaConsulta;
+    int vecesC=0;
 
     /**
      * Creates new form DlgRegistro
@@ -62,7 +63,7 @@ public class DlgRegistro extends javax.swing.JDialog {
         campoApellidoM = new javax.swing.JTextField();
         campoTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        BotonRegistro = new javax.swing.JButton();
+        BotonInsercion = new javax.swing.JButton();
         BotonRegistro1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         campoCurp = new javax.swing.JTextField();
@@ -148,16 +149,16 @@ public class DlgRegistro extends javax.swing.JDialog {
         jLabel6.setText("Fecha Nacimiento:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
 
-        BotonRegistro.setBackground(new java.awt.Color(51, 153, 0));
-        BotonRegistro.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        BotonRegistro.setForeground(new java.awt.Color(255, 255, 255));
-        BotonRegistro.setText("Guardar y regresar");
-        BotonRegistro.addActionListener(new java.awt.event.ActionListener() {
+        BotonInsercion.setBackground(new java.awt.Color(51, 153, 0));
+        BotonInsercion.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        BotonInsercion.setForeground(new java.awt.Color(255, 255, 255));
+        BotonInsercion.setText("Incersion");
+        BotonInsercion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonRegistroActionPerformed(evt);
+                BotonInsercionActionPerformed(evt);
             }
         });
-        jPanel2.add(BotonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 260, 40));
+        jPanel2.add(BotonInsercion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 260, 40));
 
         BotonRegistro1.setBackground(new java.awt.Color(51, 153, 0));
         BotonRegistro1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -219,46 +220,52 @@ public class DlgRegistro extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
+    private void BotonInsercionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInsercionActionPerformed
         // TODO add your handling code here:
-        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null || campoCurp.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los espacios", "Alerta", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // Llama al método para validar la CURP
-            if (validarCurp(campoCurp.getText())) {
-                // CURP válida, procede con el registro
-                if (calcularEdad() >= 18) {
-                    String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
-                    String rfc = campoRFC.getText();
-
-                    // Encriptar el teléfono antes de agregar la persona
-                    String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
-                    PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
-                            campoApellidoP.getText(), telefonoEncriptado, date.getDate(),
-                            campoCurp.getText());
-
-                    personaConsulta.registroPersona(personaAgregar);
-
-                    String[] botones = {"Si", "No"};
-
-                    int variable = JOptionPane.showOptionDialog(null, "La persona fue registrada con exito, ¿Desea regresar al menú? ", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null/*icono*/, botones, botones[0]);
-
-                    if (variable == 0) {
-                        control.desplegarMenu();
-                        dispose();
-                    } else {
-                        return;
-                    }             
-                } else {
-                    JOptionPane.showMessageDialog(this, "No es posible realizar el registro, el solicitante es menor de edad", "Alerta", JOptionPane.WARNING_MESSAGE);
-                }
-            } else {
-                // CURP inválida, muestra un mensaje y detiene el proceso de registro
-                JOptionPane.showMessageDialog(this, "La CURP ingresada no es válida", "Alerta", JOptionPane.WARNING_MESSAGE);
-            }
-
-        }
-    }//GEN-LAST:event_BotonRegistroActionPerformed
+//        if (campoRFC.getText().isEmpty() || campoNombre.getText().isEmpty() || campoApellidoM.getText().isEmpty() || campoApellidoP.getText().isEmpty() || campoTelefono.getText().isEmpty() || date.getDate() == null || campoCurp.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Por favor, complete todos los espacios", "Alerta", JOptionPane.WARNING_MESSAGE);
+//        } else {
+//            // Llama al método para validar la CURP
+//            if (validarCurp(campoCurp.getText())) {
+//                // CURP válida, procede con el registro
+//                if (calcularEdad() >= 18) {
+//                    String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
+//                    String rfc = campoRFC.getText();
+//
+//                    // Encriptar el teléfono antes de agregar la persona
+//                    String telefonoEncriptado = EncriptacionDatos.encriptar(campoTelefono.getText());
+//                    PersonasDTO personaAgregar = new PersonasDTO(campoRFC.getText(), campoNombre.getText(), campoApellidoM.getText(),
+//                            campoApellidoP.getText(), telefonoEncriptado, date.getDate(),
+//                            campoCurp.getText());
+//
+//                    personaConsulta.registroPersona(personaAgregar);
+//
+//                    String[] botones = {"Si", "No"};
+//
+//                    int variable = JOptionPane.showOptionDialog(null, "La persona fue registrada con exito, ¿Desea regresar al menú? ", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null/*icono*/, botones, botones[0]);
+//
+//                    if (variable == 0) {
+//                        control.desplegarMenu();
+//                        dispose();
+//                    } else {
+//                        return;
+//                    }             
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "No es posible realizar el registro, el solicitante es menor de edad", "Alerta", JOptionPane.WARNING_MESSAGE);
+//                }
+//            } else {
+//                // CURP inválida, muestra un mensaje y detiene el proceso de registro
+//                JOptionPane.showMessageDialog(this, "La CURP ingresada no es válida", "Alerta", JOptionPane.WARNING_MESSAGE);
+//            }
+//
+//        }
+    try{
+    personaConsulta.insercion();
+    JOptionPane.showMessageDialog(this, "Persona agregada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+    }catch(Exception ex){
+          JOptionPane.showMessageDialog(this, "Sucedio un problema", "Alerta", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_BotonInsercionActionPerformed
 
     private void BotonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistro1ActionPerformed
         // Verifica si los campos están vacíos
@@ -271,6 +278,7 @@ public class DlgRegistro extends javax.swing.JDialog {
             if (validarCurp(campoCurp.getText())) {
                 // CURP válida, procede con el registro
                 if (calcularEdad() >= 18) {
+                    
                     String nombreSolicitante = campoNombre.getText() + " " + campoApellidoP.getText() + " " + campoApellidoM.getText();
                     String rfc = campoRFC.getText();
 
@@ -441,8 +449,8 @@ public class DlgRegistro extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonInsercion;
     private javax.swing.JButton BotonLimpiar;
-    private javax.swing.JButton BotonRegistro;
     private javax.swing.JButton BotonRegistro1;
     private javax.swing.JButton BotonRegreso1;
     private javax.swing.JTextField campoApellidoM;

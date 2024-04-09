@@ -13,4 +13,5 @@ public interface IPersonaDAO {
     
       public void RegistrarPersona(Persona persona);
       public List<Persona> obtenerPersonas();
+       public void insercion();
 }
